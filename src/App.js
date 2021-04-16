@@ -1,4 +1,11 @@
 import { Switch, Route } from 'react-router-dom'
+import Home from './pages/home'
+import Create from './pages/create'
+
+import './static/style/common.css'
+import './static/style/header.scss'
+import './static/style/create.scss'
+import './static/style/responsive.scss'
 
 function App() {
   return (
@@ -7,8 +14,8 @@ function App() {
         <Route path='/posts/:postId/update'>
 
         </Route>
-        <Route path='/posts/create'>
-
+        <Route path='/products/create'>
+          <Create />
         </Route>
         <Route path='/posts/:title'>
 
@@ -20,7 +27,7 @@ function App() {
 
         </Route>
         <Route path='/'>
-          <h1>home page</h1>
+          <Home />
         </Route>
       </Switch>
     </div>

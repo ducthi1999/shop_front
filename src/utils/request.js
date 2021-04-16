@@ -2,10 +2,10 @@ import axios from 'axios'
 
 const accessToken = localStorage.getItem('accessToken')
 
-axios.defaults.baseURL = 'localhost:3999'
+axios.defaults.baseURL = 'http://localhost:3999/api'
 axios.defaults.headers.common['Authorization'] = accessToken
 
-const request = (method, endpoint, data) => {
+const request = (endpoint, method, data) => {
   return axios({
     method,
     url: endpoint,

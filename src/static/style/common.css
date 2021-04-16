@@ -1,0 +1,19 @@
+button {
+  border: none;
+  outline: none !important;
+  cursor: pointer;
+}
+
+input {
+  outline: none;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+}
+
+.ck.ck-editor__main>.ck-editor__editable {
+  min-height: 200px;
+}

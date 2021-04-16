@@ -6,12 +6,29 @@ const initialState = {
   products: [],
   product: {},
   users: [],
-  profile: {}
+  profile: {},
+  categories: []
 }
 
 const globalReducer = (state = initialState, action) => {
   switch (action.type) {
-    
+    case 'GET_CATEGORIES': {
+      return {
+        ...state,
+        categories: [
+          ...action.payload
+        ]
+      }
+    }
+
+    case 'GET_PRODUCT': {
+      return {
+        ...state,
+        product: {
+          ...action.payload
+        }
+      }
+    }
   }
   
   return state
