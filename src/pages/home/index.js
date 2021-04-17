@@ -6,6 +6,8 @@ import { getAllProductsAsync } from '../../redux/actions'
 
 const Home = () => {
   const products = useSelector(state => state.global.products)
+  const categories = useSelector(state => state.global.categories)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -14,7 +16,14 @@ const Home = () => {
 
   return (
     <MainLayout>
-      <GameCollection banner='/images/lol.png' />
+      {
+        categories && categories.length > 0 &&
+        categories.map(item => {
+          return (
+            <GameCollection key={item._id} category={item} />
+          )
+        })
+      }
     </MainLayout>
   )
 }

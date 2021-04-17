@@ -3,7 +3,6 @@
   h1 {
     position: relative;
     text-align: center;
-    background: black;
     color: white;
     padding: 16px;
 
@@ -48,9 +47,12 @@
           width: 100%;
           padding: 6px 0px;
           margin-top: 12px;
-          background: rgb(100, 132, 175);
+          background: rgb(228, 108, 39);
           color: white;
           margin-bottom: 32px;
+        }
+        button:hover {
+          background: rgb(107, 52, 20);
         }
       }
     }

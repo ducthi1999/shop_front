@@ -1,4 +1,7 @@
 .game-col {
+  margin-bottom: 60px;
+  padding-bottom: 42px;
+  border-bottom: 1px solid rgba(179, 173, 173, 0.301);
   h1.mb-title {
     color: rgb(223, 106, 71);
     text-align: center;
@@ -8,6 +11,7 @@
   .game-container {
     position: relative;
     h1 {
+      width: 500px;
       position: absolute;
       transform: rotate(-90deg) translateY(-50%);
       left: -265px;

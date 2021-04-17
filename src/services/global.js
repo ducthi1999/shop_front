@@ -31,17 +31,8 @@ export const createProduct = (data) => {
   return request('/products', 'POST', formData)
 }
 
-export const updateProduct = (_id, data) => {
-  const { name, price, desc, image, category } = data
-  const formData = new FormData()
-
-  formData.append('name', name || null)
-  formData.append('price', price || null)
-  formData.append('desc', desc || null)
-  formData.append('image', image || null)
-  formData.append('category', category || null)
-
-  return request(`/products/${_id}`, 'PUT', formData)
+export const updateProduct = (slug, data) => {
+  return request(`/products/${slug}`, 'PUT', data)
 }
 
 export const deleteProduct = (_id) => {

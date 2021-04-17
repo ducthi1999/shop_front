@@ -2,19 +2,19 @@ import { useEffect, useState } from 'react'
 
 import { Link } from 'react-router-dom'
 const arr = [1, 2, 3, 4]
-const GameCollection = ({ banner }) => {
+const GameCollection = ({ category }) => {
   return (
     <div className='game-col'>
       <div className='container'>
         <h1 className='mb-title'>
-          Liên Minh Huyền Thoại
+          {category && category.title}
         </h1>
         <div className='game-container'>
           <h1>
-            Liên Minh Huyền Thoại
+            {category && category.title}
           </h1>
           <div className='game-banner'>
-            <img src={banner} />
+            <img src={category && category.image} />
           </div>
           <div className='game-accounts'>
             <div className='row'>
@@ -24,7 +24,7 @@ const GameCollection = ({ banner }) => {
                     <div className='account-container'>
                       <div className='cover'>
                         <Link to=''>
-                          <img src={banner} />
+                          <img src={category && category.image} />
                         </Link>
                       </div>
                       <div className='info'>

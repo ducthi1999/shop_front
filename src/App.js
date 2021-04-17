@@ -5,6 +5,7 @@ import Home from './pages/home'
 import Login from './pages/sign/login'
 import Register from './pages/sign/register'
 import Create from './pages/create'
+
 import { getAllProductsAsync, getCategoriesAsync } from './redux/actions/index'
 
 import './static/style/common.css'
@@ -14,6 +15,8 @@ import './static/style/create.scss'
 import './static/style/home.scss'
 import './static/style/sign.scss'
 import './static/style/responsive.scss'
+import Loading from './global/Loading'
+import Update from './pages/update'
 
 function App() {
   const dispatch = useDispatch()
@@ -22,6 +25,7 @@ function App() {
   }, [])
   return (
     <div className='my-app'>
+      <Loading />
       <Switch>
         <Route path='/login'>
           <Login />
@@ -29,16 +33,16 @@ function App() {
         <Route path='/register'>
           <Register />
         </Route>
-        <Route path='/posts/:postId/update'>
-
+        <Route path='/products/:slug/update'>
+          <Update />
         </Route>
         <Route path='/products/create'>
           <Create />
         </Route>
-        <Route path='/posts/:title'>
+        <Route path='/products/:title'>
 
         </Route>
-        <Route path='/posts'>
+        <Route path='/products'>
 
         </Route>
         <Route path='/:username'>

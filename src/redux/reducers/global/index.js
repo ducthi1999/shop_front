@@ -3,6 +3,7 @@ const initialState = {
   auth: {},
   user: {},
   loading: {},
+  notif: {},
   products: [],
   product: {},
   users: [],
@@ -36,6 +37,13 @@ const globalReducer = (state = initialState, action) => {
         products: [
           ...action.payload
         ]
+      }
+    }
+
+    case 'TOGGLE_LOADING': {
+      return {
+        ...state,
+        loading: action.payload
       }
     }
   }

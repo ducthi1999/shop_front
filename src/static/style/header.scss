@@ -78,8 +78,10 @@
             }
           }
           position: absolute;
+          z-index: 1000;
+          right: 0;
           ul {
-            background-color: rgb(221, 219, 219);
+            background-color: rgba(238, 238, 238, 0.925);
             margin: 0;
             padding: 0;
             border-radius: 4px;

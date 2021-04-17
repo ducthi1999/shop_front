@@ -1,25 +1,48 @@
 import { useState, useRef, useEffect } from 'react'
-import { useHistory, Link } from 'react-router-dom'
+import { useHistory, Link, useParams } from 'react-router-dom'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
-import { createProduct } from '../../services/global'
+import { getOneProduct, updateProduct } from '../../services/global'
 import { useSelector, useDispatch } from 'react-redux'
 import { toggleLoading, triggerNotif } from '../../redux/actions'
 
-const Create = () => {
+const Update = () => {
   const history = useHistory()
+  const { slug } = useParams()
 
   const categories = useSelector(state => state.global.categories)
   const dispatch = useDispatch()
 
   const [file, setFile] = useState(null)
   const [data, getData] = useState({ name: '', path: '/images/product_default_img.png' })
-  const [desc, setDesc] = useState('')
+  const [desc, setDesc] = useState('Đang cập nhật...')
+  const [name, setName] = useState('Đang cập nhật...')
+  const [price, setPrice] = useState('Đang cập nhật...')
+  const [product, setProduct] = useState({})
 
   const nameEl = useRef(null)
   const cateEl = useRef(null)
   const priceEl = useRef(null)
   const descEl = useRef(null)
+
+  useEffect(() => {
+    dispatch(toggleLoading(true))
+    getOneProduct(slug)
+      .then(res => {
+        if (res.data && res.data.status) {
+          console.log(res.data)
+          setProduct(res.data.product)
+          getData({
+            path: res.data.product && res.data.product.image.url
+          })
+        }
+      })
+      .catch(err => {
+      })
+      .then(() => {
+        dispatch(toggleLoading(false))
+      })
+  }, [])
 
   const handleChange = (e) => {
     const selectedFile = e.target.files[0]
@@ -38,34 +61,22 @@ const Create = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
 
-    const name = nameEl.current.value.trim()
+    const name = nameEl.current.value.trim().length > 0 && nameEl.current.value.trim() || product.name
     const cate = cateEl.current.value !== 'choose' && JSON.parse(cateEl.current.value) || null
-    const price = priceEl.current.value
-    console.log(cate)
+    const price = priceEl.current.value && product.price
     const data = {
-      name, category: cate && cate._id || null, price, image: file, desc
+      name, category: cate && cate._id || null, price, image: product.image, desc
     }
-
+    if (file) {
+      data.newImage = file
+    }
     dispatch(toggleLoading(true))
-    createProduct(data)
+    console.log(data)
+    updateProduct(slug, data)
       .then(res => {
         if (res.data && res.data.status) {
-          history.replace('/')
-        } else {
-          dispatch(triggerNotif({
-            type: 'ERROR',
-            content: res.data.message
-          }))
+          dispatch(toggleLoading(true))
         }
-      })
-      .catch(err => {
-        dispatch(triggerNotif({
-          type: 'ERROR',
-          content: 'SERVER_ERROR!'
-        }))
-      })
-      .then(() => {
-        dispatch(toggleLoading(false))
       })
   }
 
@@ -75,7 +86,7 @@ const Create = () => {
         <Link to='/'>
           <i className="fas fa-home"></i>
         </Link>
-        <span>Tạo tài khoản mới</span>
+        <span>Chỉnh sửa thông tin</span>
       </h1>
       <div className='container'>
         <div className='create-container'>
@@ -84,7 +95,7 @@ const Create = () => {
               <div className='col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4'>
                 <div className='create-name'>
                   <label htmlFor='create_name'>Tên: </label>
-                  <input required ref={nameEl} id='create_name' />
+                  <input required ref={nameEl} id='create_name' defaultValue={product.name} />
                 </div>
                 <div className='create-category'>
                   <div>
@@ -94,7 +105,7 @@ const Create = () => {
                       {
                         categories && categories.length > 0 &&
                         categories.map(item =>
-                          <option key={item._id} value={JSON.stringify(item)}>
+                          <option key={item._id} selected={item._id === (product.category && product.category._id)} value={JSON.stringify(item)}>
                             {item.title}
                           </option>
                         )
@@ -106,7 +117,7 @@ const Create = () => {
                 </div>
                 <div className='create-price'>
                   <label htmlFor='create_price'>Giá: </label>
-                  <input required ref={priceEl} type='number' id='create_price' />
+                  <input defaultValue={product.price} required ref={priceEl} type='number' id='create_price' />
                 </div>
               </div>
               <div className='col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4'>
@@ -126,7 +137,7 @@ const Create = () => {
                   <CKEditor
                     className='about'
                     editor={ClassicEditor}
-                    data=""
+                    data={product.desc}
                     onReady={editor => {
                       // You can store the "editor" and use when it is needed.
                     }}
@@ -152,4 +163,4 @@ const Create = () => {
   )
 }
 
-export default Create
+export default Update

@@ -26,3 +26,23 @@ a {
 .ck.ck-editor__main>.ck-editor__editable {
   min-height: 200px;
 }
+
+#loading .loading {
+  position: fixed;
+  background: rgba(26, 25, 25, 0.658);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10000000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(4px);
+}
+
+#loading .loading img {
+  width: 100px;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
