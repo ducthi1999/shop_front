@@ -29,6 +29,15 @@ const globalReducer = (state = initialState, action) => {
         }
       }
     }
+
+    case 'GET_ALL_PRODUCT': {
+      return {
+        ...state,
+        products: [
+          ...action.payload
+        ]
+      }
+    }
   }
   
   return state

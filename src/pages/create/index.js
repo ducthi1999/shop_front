@@ -3,13 +3,11 @@ import { useHistory, Link, useLocation } from 'react-router-dom'
 import { CKEditor } from '@ckeditor/ckeditor5-react'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { createProduct } from '../../services/global'
-import { useDispatch, useSelector } from 'react-redux'
-import { getCategoriesAsync } from '../../redux/actions/index'
+import { useSelector } from 'react-redux'
 const Create = () => {
   const history = useHistory()
 
   const categories = useSelector(state => state.global.categories)
-  const dispatch = useDispatch()
 
   const [file, setFile] = useState(null)
   const [data, getData] = useState({ name: '', path: '/images/product_default_img.png' })
@@ -19,10 +17,6 @@ const Create = () => {
   const cateEl = useRef(null)
   const priceEl = useRef(null)
   const descEl = useRef(null)
-
-  useEffect(() => {
-    dispatch(getCategoriesAsync())
-  }, [])
 
   const handleChange = (e) => {
     const selectedFile = e.target.files[0]

@@ -1,5 +1,5 @@
 #header {
-  background: rgb(24, 23, 23);
+  color: black !important;
   border-bottom: 1px solid rgba(83, 79, 79, 0.171);
 }
 
@@ -11,7 +11,7 @@
     align-items: center;
 
     .avt-wrapper {
-      width: 200px;
+      width: 80px;
       img {
         width: 100%;
       }
@@ -23,7 +23,7 @@
       position: relative;
       a {
         margin: auto 16px;
-        color: white;
+        color: rgb(32, 31, 31);
         text-decoration: none;
         span {
           margin-left: 8px;
@@ -50,14 +50,14 @@
         }
       }
       a:hover {
-        color: rgba(255, 255, 255, 0.747);
+        color: rgba(29, 26, 26, 0.747);
         transition: ease 0.5s;
       }
 
       button {
         position: relative;
         background: transparent;
-        color: white;
+        color: rgb(24, 22, 22);
         cursor: pointer;
         img {
           width: 36px;
@@ -79,7 +79,7 @@
           }
           position: absolute;
           ul {
-            background-color: white;
+            background-color: rgb(221, 219, 219);
             margin: 0;
             padding: 0;
             border-radius: 4px;
@@ -93,12 +93,12 @@
           }
 
           li:hover {
-            background: rgba(89, 136, 180, 0.116);
+            background: rgba(74, 77, 80, 0.116);
             transition: ease 0.5s;
           }
 
           a {
-            color: rgb(99, 92, 133) !important;
+            color: rgb(18, 18, 19) !important;
           }
         }
       }
@@ -135,7 +135,7 @@
     align-items: center;
     height: 86px;
     .avt-wrapper {
-      width: 200px;
+      width: 82px;
 
       img {
         width: 100%;
@@ -164,7 +164,7 @@
           top: 0;
           right: 0;
           border-radius: 50%;
-          color: white;
+          color: rgb(27, 26, 26);
           border-bottom: 1px solid rgba(32, 31, 31, 0.705);
         }
       }
@@ -212,7 +212,7 @@
 
       a {
         margin: auto 8px;
-        color: white;
+        color: rgb(29, 27, 27);
         text-decoration: none;
         span {
           margin-left: 8px;
@@ -237,7 +237,7 @@
   content: "";
   position: absolute;
   border: 10px solid transparent;
-  border-bottom-color: white;
+  border-bottom-color: rgb(31, 28, 28);
   top: -20px;
   right: 196px;
 }
@@ -255,7 +255,7 @@
 
 .notif-container ul li {
   list-style-type: none;
-  font-family: fontLight;
+  font-family: mainFont;
   font-size: 1rem;
   text-align: left;
   border-bottom: 1px solid rgba(104, 100, 100, 0.24);
@@ -299,7 +299,7 @@
   .notify-btn {
     position: relative;
     margin: 0px 12px;
-
+    color: rgb(26, 24, 24);
     span {
       position: absolute;
       width: 16px;
@@ -375,7 +375,7 @@
   color: rgba(39, 36, 36, 0.685);
   width: 100%;
   outline: none;
-  font-family: fontLight;
+  font-family: mainFont;
   border: none;
   caret-color: rgba(39, 36, 36, 0.685);
 }

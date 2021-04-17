@@ -1,0 +1,89 @@
+.game-col {
+  h1.mb-title {
+    color: rgb(223, 106, 71);
+    text-align: center;
+    margin-bottom: 1rem;
+    display: none
+  }
+  .game-container {
+    position: relative;
+    h1 {
+      position: absolute;
+      transform: rotate(-90deg) translateY(-50%);
+      left: -265px;
+      top: 50%;
+      color: rgb(223, 106, 71)
+    }
+  }
+  .game-banner {
+    width: 100%;
+    margin-bottom: 21px;
+    img {
+      width: 100%;
+      aspect-ratio: 3;
+      object-fit: cover;
+    }
+  }
+
+  .game-accounts {
+    .account-container {
+      -webkit-box-shadow: 0px 0px 12px 6px rgba(204, 204, 204, 0.568);
+      -moz-box-shadow: 0px 0px 12px 6px rgba(204, 204, 204, 0.568);
+      box-shadow: 0px 0px 12px 6px rgba(204, 204, 204, 0.568);
+      background: rgba(255, 255, 255, 0.336);
+      margin-bottom: 21px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .account-container:hover {
+      background: rgba(221, 247, 247, 0.596);
+      transition: ease-in 0.3s;
+    }
+
+    .cover {
+      width: 100%;
+      img {
+        width: 100%;
+        aspect-ratio: 3.6;
+        object-fit: cover;
+      }
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      padding: 12px;
+      .wrap {
+        margin-top: 8px;
+        display: flex;
+        justify-content: space-between;
+        a {
+          font-weight: bold;
+          font-style: italic;
+          color: rgb(108, 126, 185) !important;
+        }
+
+        span {
+          color: rgb(240, 70, 70);
+          font-weight: 500;
+
+          i {
+            color: rgb(177, 177, 49);
+            margin-right: 8px;
+          }
+        }
+      }
+      a {
+        color: black;
+        font-weight: bolder;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: rgb(153, 126, 38);
+        text-shadow: 4px;
+        transition: ease 0.2s;
+      }
+    }
+  }
+}

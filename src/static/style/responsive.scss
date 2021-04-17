@@ -20,34 +20,12 @@
     display: none;
   }
 
-  .profile .user-bio p {
-    font-size: 1rem !important;
-  }
 }
 
 @media (max-width: 767.98px) {
-  #product .show {
-    flex-wrap: wrap;
+  .game-col .mb-title {
+    font-size: 2rem;
   }
-  #product .show .image-wrapper .main-image {
-    width: 100%;
-  }
-  #product .show .main-info {
-    width: 100%;
-  }
-
-  #product .player-list {
-    .player-quantity {
-      display: none !important;
-    }
-    .player-time {
-      display: none !important;
-    }
-    .title-container {
-      justify-content: space-between !important;
-    }
-  }
-
   .notification {
     display: none !important;
   }
@@ -133,6 +111,17 @@
 }
 
 @media (max-width: 991.98px) {
+  .game-col .game-banner img {
+    aspect-ratio: 2;
+  }
+  .game-col .game-container {
+    h1 {
+      display: none;
+    }
+  }
+  .game-col h1.mb-title {
+    display: block;
+  }
 }
 
 @media (max-width: 1199.98px) {

@@ -25,17 +25,17 @@ const Header = () => {
             <div className='header-container'>
               <div className='avt-wrapper'>
                 <a href='/'>
-                  <img src='/images/desktop_logo.png' alt='' />
+                  <img src='/images/logo.png' alt='' />
                 </a>
               </div>
               <div className='header-right-wrapper'>
                 <div className='search'>
-                  <i onClick={() => setSearchModal(true)} style={{ color: 'white', fontSize: '1.1rem', marginRight: 12, cursor: 'pointer' }} className="fas fa-search"></i>
+                  <i onClick={() => setSearchModal(true)} style={{ color: 'black', fontSize: '1.1rem', marginRight: 12, cursor: 'pointer' }} className="fas fa-search"></i>
                 </div>
                 <Link to='/products/create'>
-                  <i className="fas fa-gavel"></i>
+                  <i className="fas fa-gamepad"></i>
                   <span>
-                    Mở đấu giá
+                    Đăng bán tài khoản
                 </span>
                 </Link>
                 {
@@ -55,7 +55,7 @@ const Header = () => {
                       </div>
                     }
                     <button onClick={() => setChildMenu(!childMenu)}>
-                      <img src=''/>
+                      <img src='/images/user_default_img.png' />
                       <span>
                         Bui van manh
                       </span>
@@ -161,9 +161,9 @@ const Header = () => {
                 <ul>
                   <li>
                     <Link to='/products/create'>
-                      <i className="fas fa-gavel"></i>
+                      <i className="fas fa-gamepad"></i>
                       <span>
-                        Mở đấu giá
+                        Đăng bán tài khoản
                       </span>
                     </Link>
                   </li>
@@ -238,7 +238,7 @@ const Header = () => {
             <div className='header-container'>
               <div className='avt-wrapper'>
                 <a href='/'>
-                  <img src='/images/mb_logo.png' alt='' />
+                  <img src='/images/logo.png' alt='' />
                 </a>
               </div>
               <div className='btn-wrapper'>
@@ -256,7 +256,7 @@ const Header = () => {
                     }
                   </button>
                 }
-                <button className='menu-btn' onClick={() => {setMbMenu(true); setAdminNotif(false)}}>
+                <button className='menu-btn' onClick={() => { setMbMenu(true); setAdminNotif(false) }}>
                   <i className="fas fa-bars"></i>
                   {
                     adminNotif &&

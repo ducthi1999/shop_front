@@ -1,3 +1,12 @@
+@font-face {
+  font-family: mainFont;
+  src: url('../fonts/Jura-SemiBold.ttf')
+}
+
+* {
+  font-family: mainFont;
+  color: rgb(29, 28, 28)
+}
 button {
   border: none;
   outline: none !important;

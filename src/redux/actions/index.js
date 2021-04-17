@@ -21,3 +21,22 @@ const getCategories = (payload) => {
     payload
   }
 }
+
+export const getAllProductsAsync = () => {
+  return dispatch => {
+    API.getAllProducts({})
+      .then(res => {
+        console.log(res)
+        if (res.data && res.data.status) {
+          dispatch(getAllProducts(res.data.products))
+        }
+      })
+  }
+}
+
+const getAllProducts = (payload) => {
+  return {
+    type: 'GET_ALL_PRODUCTS',
+    payload
+  }
+}
