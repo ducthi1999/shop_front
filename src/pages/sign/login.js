@@ -1,8 +1,12 @@
 import { Link, useHistory } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { usernameValidate } from '../../utils/validate'
+import { useDispatch } from 'react-redux'
+import { loginAuth } from '../../services/global'
+import { getUserData, toggleLoading } from '../../redux/actions/index'
 
 const Login = (props) => {
+  const dispatch = useDispatch()
 
   const [usernameErr, logUsernameErr] = useState(false)
   const [userData, setUserData] = useState({})
@@ -12,6 +16,9 @@ const Login = (props) => {
 
   useEffect(() => {
     localStorage.clear()
+    dispatch({
+      type: 'CLEAR_DATA'
+    })
   }, [])
 
   const usernameValidation = (e) => {
@@ -65,7 +72,24 @@ const Login = (props) => {
 
   const submitHandle = (e) => {
     if (checkValidate(usernameErr, passCheck)) {
-     
+      dispatch(toggleLoading(true))
+      loginAuth(userData)
+        .then(res => {
+          if (res.data && res.data.status) {
+            dispatch(getUserData({
+              ...res.data.user,
+              token: res.data.token,
+              login: true
+            }))
+            history.replace('/')
+          } else {
+            console.log(res)
+          }
+        })
+        .catch(err => console.log(err))
+        .then(() => {
+          dispatch(toggleLoading(false))
+        })
     } else {
       alert('Thông tin không hợp lệ!')
     }

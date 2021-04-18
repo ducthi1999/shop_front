@@ -10,6 +10,7 @@ const Create = () => {
   const history = useHistory()
 
   const categories = useSelector(state => state.global.categories)
+  const login = useSelector(state => state.global.login)
   const dispatch = useDispatch()
 
   const [file, setFile] = useState(null)
@@ -20,6 +21,14 @@ const Create = () => {
   const cateEl = useRef(null)
   const priceEl = useRef(null)
   const descEl = useRef(null)
+
+  useEffect(() => {
+    if (!login) {
+      setTimeout(() => {
+        history.replace('/login')
+      }, 1000)
+    }
+  }, [])
 
   const handleChange = (e) => {
     const selectedFile = e.target.files[0]
@@ -41,7 +50,7 @@ const Create = () => {
     const name = nameEl.current.value.trim()
     const cate = cateEl.current.value !== 'choose' && JSON.parse(cateEl.current.value) || null
     const price = priceEl.current.value
-    console.log(cate)
+
     const data = {
       name, category: cate && cate._id || null, price, image: file, desc
     }

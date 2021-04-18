@@ -3,7 +3,35 @@ import { createBrowserHistory } from 'history'
 const browserHistory = createBrowserHistory()
 
 export const auth = () => {
+  return dispatch => {
+    API.auth()
+      .then(res => {
+        if (res.data && res.data.status) {
+          let payload = {
+            login: res.data.login,
+            user: res.data.user
+          }
+          dispatch(authAsync(payload))
+        } else {
+          console.log('Lỗi xác thực!')
+        }
+      })
+  }
+}
 
+export const authAsync = (payload) => {
+  return {
+    type: 'AUTHENTICATION',
+    payload
+  }
+
+}
+
+export const getUserData = (userData) => {
+  return {
+    type: 'GET_USER_DATA',
+    payload: userData
+  }
 }
 
 export const toggleLoading = (payload) => {

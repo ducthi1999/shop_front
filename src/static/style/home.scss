@@ -6,7 +6,7 @@
     color: rgb(223, 106, 71);
     text-align: center;
     margin-bottom: 1rem;
-    display: none
+    display: none;
   }
   .game-container {
     position: relative;
@@ -16,7 +16,21 @@
       transform: rotate(-90deg) translateY(-50%);
       left: -265px;
       top: 50%;
-      color: rgb(223, 106, 71)
+      color: rgb(223, 106, 71);
+    }
+  }
+  .see-more {
+    text-align: center;
+    .see-more-btn {
+      display: inline-block;
+      margin: 0 auto;
+      text-decoration: none;
+      color: rgb(219, 114, 28);
+      font-weight: bolder;
+      font-size: 1.2rem;
+    }
+    .see-more-btn:hover {
+      color: rgb(185, 89, 9);
     }
   }
   .game-banner {

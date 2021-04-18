@@ -6,7 +6,7 @@ import Login from './pages/sign/login'
 import Register from './pages/sign/register'
 import Create from './pages/create'
 
-import { getAllProductsAsync, getCategoriesAsync } from './redux/actions/index'
+import { getAllProductsAsync, getCategoriesAsync, auth } from './redux/actions/index'
 
 import './static/style/common.css'
 import './static/style/header.scss'
@@ -17,12 +17,17 @@ import './static/style/sign.scss'
 import './static/style/responsive.scss'
 import Loading from './global/Loading'
 import Update from './pages/update'
+import Detail from './pages/detail'
 
 function App() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getCategoriesAsync())
   }, [])
+
+  useEffect(() => {
+    dispatch(auth())
+  })
   return (
     <div className='my-app'>
       <Loading />
@@ -39,8 +44,8 @@ function App() {
         <Route path='/products/create'>
           <Create />
         </Route>
-        <Route path='/products/:title'>
-
+        <Route path='/products/:slug'>
+          <Detail />
         </Route>
         <Route path='/products'>
 

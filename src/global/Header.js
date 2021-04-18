@@ -2,8 +2,22 @@ import { Link } from 'react-router-dom'
 import { useState, useContext, useEffect } from 'react'
 import Notify from './Notify'
 import SearchModal from './SearchModal'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Header = () => {
+  const dispatch = useDispatch()
+  const login = useSelector(state => state.global.login)
+  const user = useSelector(state => state.global.user)
+  const {
+    username,
+    firstName,
+    lastName,
+    role,
+    userNotif,
+    userBought,
+    userImage,
+    phone
+  } = user
 
   const [childMenu, setChildMenu] = useState(false)
   const [manageMenu, setManageMenu] = useState(false)
@@ -39,10 +53,10 @@ const Header = () => {
                 </span>
                 </Link>
                 {
-                  true &&
+                  login &&
                   <>
                     {
-                      false &&
+                      role === 'user' &&
                       <div className='header-notify'>
                         <button onClick={() => setNotify(!notify)} className='notify-btn'>
                           <i className="fas fa-bell"></i>
@@ -57,7 +71,7 @@ const Header = () => {
                     <button onClick={() => setChildMenu(!childMenu)}>
                       <img src='/images/user_default_img.png' />
                       <span>
-                        Bui van manh
+                        {user.username}
                       </span>
                       {
                         childMenu &&

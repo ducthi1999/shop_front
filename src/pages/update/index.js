@@ -16,21 +16,17 @@ const Update = () => {
   const [file, setFile] = useState(null)
   const [data, getData] = useState({ name: '', path: '/images/product_default_img.png' })
   const [desc, setDesc] = useState('Đang cập nhật...')
-  const [name, setName] = useState('Đang cập nhật...')
-  const [price, setPrice] = useState('Đang cập nhật...')
   const [product, setProduct] = useState({})
 
   const nameEl = useRef(null)
   const cateEl = useRef(null)
   const priceEl = useRef(null)
-  const descEl = useRef(null)
 
   useEffect(() => {
     dispatch(toggleLoading(true))
     getOneProduct(slug)
       .then(res => {
         if (res.data && res.data.status) {
-          console.log(res.data)
           setProduct(res.data.product)
           getData({
             path: res.data.product && res.data.product.image.url
@@ -63,20 +59,26 @@ const Update = () => {
 
     const name = nameEl.current.value.trim().length > 0 && nameEl.current.value.trim() || product.name
     const cate = cateEl.current.value !== 'choose' && JSON.parse(cateEl.current.value) || null
-    const price = priceEl.current.value && product.price
+    const price = priceEl.current.value || product.price
+    const seller = product.seller || {}
+    console.log(price)
     const data = {
-      name, category: cate && cate._id || null, price, image: product.image, desc
+      name, category: cate && cate._id || null, price, image: product.image, desc, seller
     }
     if (file) {
       data.newImage = file
     }
     dispatch(toggleLoading(true))
-    console.log(data)
+
     updateProduct(slug, data)
       .then(res => {
         if (res.data && res.data.status) {
-          dispatch(toggleLoading(true))
+          
         }
+      })
+      .catch(err => {})
+      .then(() => {
+        dispatch(toggleLoading(false))
       })
   }
 

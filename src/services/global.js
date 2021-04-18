@@ -4,13 +4,17 @@ import request from '../utils/request'
 export const auth = () => {
   return request('/auth', 'GET')
 }
+
+export const loginAuth = (userData) => {
+  return request('/login', 'POST', userData)
+}
 //productS
 export const getAllProducts = (query) => {
   const { sort, categoryId } = query
   var url = `/products?`
   if (sort) url = url + `sort=${sort}&`
   if (categoryId) url = url + `category=${categoryId}&`
-
+  console.log(url)
   return request(url, "GET")
 }
 
