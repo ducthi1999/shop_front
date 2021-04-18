@@ -16,7 +16,8 @@ const Header = () => {
     userNotif,
     userBought,
     userImage,
-    phone
+    phone,
+    coins
   } = user
 
   const [childMenu, setChildMenu] = useState(false)
@@ -57,16 +58,22 @@ const Header = () => {
                   <>
                     {
                       role === 'user' &&
-                      <div className='header-notify'>
-                        <button onClick={() => setNotify(!notify)} className='notify-btn'>
-                          <i className="fas fa-bell"></i>
-                          <span>10</span>
-                        </button>
-                        {
-                          notify &&
-                          <Notify notifyList={notifyList} />
-                        }
-                      </div>
+                      <>
+                        <div className='header-notify'>
+                          <button onClick={() => setNotify(!notify)} className='notify-btn'>
+                            <i className="fas fa-bell"></i>
+                            <span style={{color: 'white'}}>10</span>
+                          </button>
+                          {
+                            notify &&
+                            <Notify notifyList={notifyList} />
+                          }
+                        </div>
+                        <div className='user-coins'>
+                          <i style={{marginRight: 6, marginLeft: 8, color: 'yellow'}} className="fas fa-coins"></i>
+                          <span>{coins}</span>
+                        </div>
+                      </>
                     }
                     <button onClick={() => setChildMenu(!childMenu)}>
                       <img src='/images/user_default_img.png' />
@@ -112,7 +119,7 @@ const Header = () => {
                       </span>
                     </Link>
                     <Link style={{ marginLeft: '0px !important' }} to='/register' className='login-btn'>
-                      <i class="fas fa-user-plus"></i>
+                      <i className="fas fa-user-plus"></i>
                       <span>
                         Đăng kí
                       </span>
@@ -238,7 +245,7 @@ const Header = () => {
                       </li>
                       <li>
                         <Link to={`/register`}>
-                          <i class="fas fa-user-plus"></i>
+                          <i className="fas fa-user-plus"></i>
                           <span>
                             Đăng kí
                           </span>

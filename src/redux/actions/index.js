@@ -73,6 +73,7 @@ export const getAllProductsAsync = () => {
       .then(res => {
         if (res.data && res.data.status) {
           dispatch(getAllProducts(res.data.products))
+          dispatch(toggleLoading(false))
         } else {
           triggerNotif({
             type: 'ERROR',
@@ -95,6 +96,29 @@ export const getAllProductsAsync = () => {
 const getAllProducts = (payload) => {
   return {
     type: 'GET_ALL_PRODUCTS',
+    payload
+  }
+}
+
+export const getProductAsync = (slug) => {
+  return dispatch => {
+    API.getOneProduct(slug)
+      .then(res => {
+        if (res.data && res.data.status) {
+          dispatch(getProduct(res.data.product))
+        } else {
+
+        }
+      })
+      .catch(err => {
+
+      })
+  }
+}
+
+const getProduct = (payload) => {
+  return {
+    type: 'GET_ONE_PRODUCT',
     payload
   }
 }

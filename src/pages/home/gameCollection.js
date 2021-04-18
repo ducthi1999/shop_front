@@ -27,7 +27,7 @@ const GameCollection = ({ category }) => {
                 <div className='row'>
                   {
                     currentProducts.map(item =>
-                      <div className='col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6'>
+                      <div key={item._id} className='col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6'>
                         <div className='account-container'>
                           <div className='cover'>
                             <Link to={`/products/${item.slug}`}>

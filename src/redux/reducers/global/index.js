@@ -1,4 +1,8 @@
+import { io } from 'socket.io-client'
+const socket = io('localhost:3999')
+
 const initialState = {
+  socket,
   login: false,
   auth: {},
   user: {
@@ -8,10 +12,11 @@ const initialState = {
     userImage: null,
     notif: {},
     userNotif: [],
+    coins: 0,
     userBought: [],
     phone: '',
   },
-  loading: {},
+  loading: false,
   products: [],
   product: {},
   users: [],
@@ -30,7 +35,7 @@ const globalReducer = (state = initialState, action) => {
       }
     }
 
-    case 'GET_PRODUCT': {
+    case 'GET_ONE_PRODUCT': {
       return {
         ...state,
         product: {
@@ -56,7 +61,7 @@ const globalReducer = (state = initialState, action) => {
     }
 
     case 'GET_USER_DATA': {
-      const { login, firstName, image, lastName, role, token, notif, bought, username, phone } = action.payload
+      const { login, firstName, image, lastName, coins, role, token, notif, bought, username, phone } = action.payload
       localStorage.setItem('accessToken', token)
       return {
         ...state,
@@ -66,6 +71,7 @@ const globalReducer = (state = initialState, action) => {
           firstName,
           lastName,
           role,
+          coins,
           userNotif: notif,
           userBought: bought,
           userImage: image,
@@ -76,7 +82,7 @@ const globalReducer = (state = initialState, action) => {
 
     case 'AUTHENTICATION': {
       const { login, user } = action.payload
-      const { firstName, image, lastName, role, notif, bought, username, phone } = user
+      const { firstName, image, lastName, coins, role, notif, bought, username, phone } = user
       return {
         ...state,
         login: login,
@@ -85,6 +91,7 @@ const globalReducer = (state = initialState, action) => {
           firstName,
           lastName,
           role,
+          coins,
           userNotif: notif,
           userBought: bought,
           userImage: image,
@@ -102,6 +109,7 @@ const globalReducer = (state = initialState, action) => {
           firstName: '',
           lastName: '',
           role: '',
+          coins: 0,
           userNotif: [],
           userBought: [],
           userImage: null,

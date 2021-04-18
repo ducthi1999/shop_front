@@ -68,15 +68,16 @@ const Update = () => {
     if (file) {
       data.newImage = file
     }
-    dispatch(toggleLoading(true))
 
+    dispatch(toggleLoading(true))
     updateProduct(slug, data)
       .then(res => {
         if (res.data && res.data.status) {
-          
+          dispatch(toggleLoading(false))
+          history.replace('/')
         }
       })
-      .catch(err => {})
+      .catch(err => { })
       .then(() => {
         dispatch(toggleLoading(false))
       })
