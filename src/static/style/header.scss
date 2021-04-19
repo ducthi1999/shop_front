@@ -167,7 +167,7 @@
           top: 0;
           right: 0;
           border-radius: 50%;
-          color: rgb(27, 26, 26);
+          color: rgb(255, 255, 255);
           border-bottom: 1px solid rgba(32, 31, 31, 0.705);
         }
       }
@@ -305,16 +305,16 @@
     color: rgb(26, 24, 24);
     span {
       position: absolute;
-      width: 16px;
-      height: 16px;
+      width: 12px;
+      height: 12px;
       background: red;
       display: flex;
       justify-content: center;
       align-items: center;
       font-size: 0.6rem;
       border-radius: 50%;
-      top: -6px;
-      right: -8px;
+      top: -2px;
+      right: -4px;
     }
   }
 }

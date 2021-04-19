@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
 
 const Notify = ({ notifyList }) => {
-  const newNotifyList = notifyList
+  const newNotifyList = [...notifyList]
+  newNotifyList.reverse()
   return (
     <>
       <div className='notification'>
@@ -14,14 +15,14 @@ const Notify = ({ notifyList }) => {
                   newNotifyList.map(item =>
                     <li>
                       <span>
-                        {item.value}
+                        {item.content}
                       </span>
                     </li>
                   )
                 }
               </ul>
               ||
-              <p style={{paddingLeft: 12}}>Chưa có thông báo</p>
+              <p style={{ paddingLeft: 12 }}>Chưa có thông báo</p>
             }
           </div>
         </div>
@@ -37,7 +38,7 @@ const Notify = ({ notifyList }) => {
                 newNotifyList.map(item =>
                   <li>
                     <span>
-                      {item.value}
+                      {item.content}
                     </span>
                   </li>
                 )

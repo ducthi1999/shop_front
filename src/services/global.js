@@ -8,13 +8,17 @@ export const auth = () => {
 export const loginAuth = (userData) => {
   return request('/login', 'POST', userData)
 }
+
+export const register = (userData) => {
+  return request('/register', 'POST', userData)
+}
 //productS
 export const getAllProducts = (query) => {
-  const { sort, categoryId } = query
+  const { sort, categoryId, sellerId } = query
   var url = `/products?`
   if (sort) url = url + `sort=${sort}&`
+  if (sellerId) url = url + `seller=${sellerId}&`
   if (categoryId) url = url + `category=${categoryId}&`
-  console.log(url)
   return request(url, "GET")
 }
 
@@ -45,6 +49,10 @@ export const deleteProduct = (_id) => {
 
 export const searchProduct = (query) => {
   return request(`/search?q=${query}`, 'GET')
+}
+
+export const buyProduct = (productId) => {
+  return request(`/products/buy/${productId}`)
 }
 
 //CATEGORY

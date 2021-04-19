@@ -5,7 +5,16 @@ const initialState = {
   socket,
   login: false,
   auth: {},
+  credit: {
+    number: '',
+    bank: ''
+  },
+  popup: {
+    active: false,
+    content: ''
+  },
   user: {
+    _id: '',
     firstName: '',
     lastName: '',
     role: null,
@@ -35,6 +44,18 @@ const globalReducer = (state = initialState, action) => {
       }
     }
 
+    case 'UPDATE_NOTIF': {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          userNotif: [
+            ...action.payload
+          ]
+        }
+      }
+    }
+
     case 'GET_ONE_PRODUCT': {
       return {
         ...state,
@@ -61,16 +82,18 @@ const globalReducer = (state = initialState, action) => {
     }
 
     case 'GET_USER_DATA': {
-      const { login, firstName, image, lastName, coins, role, token, notif, bought, username, phone } = action.payload
+      const { login, firstName, _id, credit, image, lastName, coins, role, token, notif, bought, username, phone } = action.payload
       localStorage.setItem('accessToken', token)
       return {
         ...state,
         login: login,
         user: {
+          _id,
           username,
           firstName,
           lastName,
           role,
+          credit,
           coins,
           userNotif: notif,
           userBought: bought,
@@ -82,16 +105,18 @@ const globalReducer = (state = initialState, action) => {
 
     case 'AUTHENTICATION': {
       const { login, user } = action.payload
-      const { firstName, image, lastName, coins, role, notif, bought, username, phone } = user
+      const { firstName, image, _id, credit, lastName, coins, role, notif, bought, username, phone } = user
       return {
         ...state,
         login: login,
         user: {
+          _id,
           username,
           firstName,
           lastName,
           role,
           coins,
+          credit,
           userNotif: notif,
           userBought: bought,
           userImage: image,
@@ -105,11 +130,16 @@ const globalReducer = (state = initialState, action) => {
         ...state,
         login: false,
         user: {
+          _id: '',
           username: '',
           firstName: '',
           lastName: '',
           role: '',
           coins: 0,
+          credit: {
+            number: '',
+            bank: ''
+          },
           userNotif: [],
           userBought: [],
           userImage: null,

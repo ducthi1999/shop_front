@@ -1,8 +1,12 @@
 import { Link, useHistory } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { nameValidate, usernameValidate, emailValidate, phoneValidate } from '../../utils/validate'
+import { register } from '../../services/global'
+import { useDispatch } from 'react-redux'
+import { getUserData, toggleLoading } from '../../redux/actions'
 
 const Register = (props) => {
+    const dispatch = useDispatch()
 
     const [emailErr, logEmailErr] = useState(false)
     const [usernameErr, logUsernameErr] = useState(false)
@@ -13,7 +17,10 @@ const Register = (props) => {
     const [prePass, setPrePass] = useState('')
     const [passCheck, setPassCheck] = useState(false)
 
+
     const [userData, setUserData] = useState({})
+    const creditNumberEl = useRef(null)
+    const bankEl = useRef(null)
 
     const history = useHistory()
 
@@ -127,7 +134,36 @@ const Register = (props) => {
     }
 
     const submitHandle = (e) => {
+        console.log('submiting')
         if (checkValidate()) {
+            const credit = {
+                number: creditNumberEl.current.value,
+                bank: bankEl.current.value
+            }
+            const data = {
+                ...userData,
+                credit
+            }
+
+            dispatch(toggleLoading(true))
+            register(data)
+                .then(res => {
+                    if (res.data && res.data.status) {
+                        dispatch(toggleLoading(false))
+                        dispatch(getUserData({
+                            ...res.data.user,
+                            token: res.data.token,
+                            login: true
+                        }))
+                        history.replace('/')
+                    } else {
+                        console.log('Đăng kí thất bại')
+                    }
+                })
+                .catch(err => console.log(err))
+                .then(() => {
+                    dispatch(toggleLoading(false))
+                })
 
         } else {
             alert('Thông tin không hợp lệ!')
@@ -157,6 +193,10 @@ const Register = (props) => {
                     <input onChange={(e) => emailValidation(e)} className={emailErr ? 'validate-error' : ''} required id='email' placeholder='example@email.com' name='email' />
                     <label htmlFor='phone'>Phone Number: </label>
                     <input onChange={phoneNumberValidate} className={phoneNumberErr ? 'validate-error' : ''} required id='phone' placeholder='+84...' name='phone' />
+                    <label htmlFor='credit_number'>Credit Number: </label>
+                    <input required id='credit_number' ref={creditNumberEl} placeholder='account number or card' name='credit-number' />
+                    <label htmlFor='bank'>Bank: </label>
+                    <input required ref={bankEl} id='bank' placeholder='bank you use' name='bank' />
                     <label htmlFor='username'>Username: </label>
                     <input onChange={(e) => usernameValidation(e)} className={usernameErr ? 'validate-error' : ''} required id='username' placeholder='username123' name='username' />
                     <label htmlFor='password'>Password: </label>

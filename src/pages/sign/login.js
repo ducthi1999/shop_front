@@ -83,7 +83,7 @@ const Login = (props) => {
             }))
             history.replace('/')
           } else {
-            console.log(res)
+            alert('Sai tài khoản hoặc mật khẩu')
           }
         })
         .catch(err => console.log(err))

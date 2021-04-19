@@ -7,12 +7,32 @@ import Breadcrumb from '../../global/Breadcrumb'
 
 const Detail = () => {
   const data = useSelector(state => state.global.product)
+  const user = useSelector(state => state.global.user)
+  const socket = useSelector(state => state.global.socket)
+
   const dispatch = useDispatch()
   const { slug } = useParams()
 
   useEffect(() => {
     dispatch(getProductAsync(slug))
   })
+
+  const buyProduct = () => {
+    const newProduct = {
+      ...data,
+      seller: {
+        ...data.seller,
+        coins: data.seller.coins + data.price
+      }
+    }
+
+    const newUser = {
+      ...user,
+      coins: user.coins + data.price
+    }
+    socket.emit('buy-product', { product: newProduct, user: newUser })
+  }
+
   return (
     <MainLayout>
       <div id='detail'>
@@ -26,7 +46,7 @@ const Detail = () => {
               <h1>{data.name}</h1>
             </div>
             <div className='price'>
-              <button>
+              <button onClick={buyProduct}>
                 <i className="fas fa-coins"></i>
                 <span>{data.price} coins</span>
               </button>

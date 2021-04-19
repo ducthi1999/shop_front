@@ -8,6 +8,7 @@ const Header = () => {
   const dispatch = useDispatch()
   const login = useSelector(state => state.global.login)
   const user = useSelector(state => state.global.user)
+  const socket = useSelector(state => state.global.socket)
   const {
     username,
     firstName,
@@ -24,13 +25,18 @@ const Header = () => {
   const [manageMenu, setManageMenu] = useState(false)
   const [mbMenu, setMbMenu] = useState(false)
   const [notify, setNotify] = useState(false)
+  const [triggerNotif, setTriggerNotif] = useState(false)
   const [notifyList, setNotifyList] = useState([])
   const [searchModal, setSearchModal] = useState(false)
   const [adminNotif, setAdminNotif] = useState(false)
   const [productNotif, setProductNotif] = useState(false)
 
-  const userId = localStorage.getItem('id')
-
+  useEffect(() => {
+    socket.on('buy-product-notif', notif => {
+      setTriggerNotif(true)
+      console.log(notif)
+    })
+  })
   return (
     <>
       <SearchModal status={searchModal} setSearchModal={setSearchModal} />
@@ -60,17 +66,20 @@ const Header = () => {
                       role === 'user' &&
                       <>
                         <div className='header-notify'>
-                          <button onClick={() => setNotify(!notify)} className='notify-btn'>
+                          <button onClick={() => {setNotify(!notify); setTriggerNotif(false)}} className='notify-btn'>
                             <i className="fas fa-bell"></i>
-                            <span style={{color: 'white'}}>10</span>
+                            {
+                              triggerNotif &&
+                              <span style={{ color: 'white' }}></span>
+                            }
                           </button>
                           {
                             notify &&
-                            <Notify notifyList={notifyList} />
+                            <Notify notifyList={userNotif || []} />
                           }
                         </div>
                         <div className='user-coins'>
-                          <i style={{marginRight: 6, marginLeft: 8, color: 'yellow'}} className="fas fa-coins"></i>
+                          <i style={{ marginRight: 6, marginLeft: 8, color: 'yellow' }} className="fas fa-coins"></i>
                           <span>{coins}</span>
                         </div>
                       </>
@@ -267,10 +276,13 @@ const Header = () => {
                   <i className="fas fa-search"></i>
                 </button>
                 {
-                  'manh' !== 'admin' &&
-                  <button onClick={() => setNotify(!notify)} className='notify-btn'>
+                  user.role !== 'admin' &&
+                  <button onClick={() => {setNotify(!notify); setTriggerNotif(false)}} className='notify-btn'>
                     <i className="fas fa-bell"></i>
-                    <span>10</span>
+                    {
+                      triggerNotif &&
+                      <span></span>
+                    }
                     {
                       notify &&
                       <Notify notifyList={[]} />
