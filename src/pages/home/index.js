@@ -11,7 +11,7 @@ const Home = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(getAllProductsAsync())
+    dispatch(getAllProductsAsync({passed: 1}))
   }, [])
 
   return (

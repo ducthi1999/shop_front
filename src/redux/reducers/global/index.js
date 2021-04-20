@@ -1,5 +1,5 @@
 import { io } from 'socket.io-client'
-const socket = io('localhost:3999')
+const socket = io('https://gamingshopvn-api.herokuapp.com')
 
 const initialState = {
   socket,

@@ -12,6 +12,7 @@ const Create = () => {
 
   const categories = useSelector(state => state.global.categories)
   const login = useSelector(state => state.global.login)
+  const socket = useSelector(state => state.global.socket)
   const dispatch = useDispatch()
 
   const [file, setFile] = useState(null)
@@ -60,6 +61,7 @@ const Create = () => {
     createProduct(data)
       .then(res => {
         if (res.data && res.data.status) {
+          socket.emit('create-product')
           history.replace('/')
         } else {
           dispatch(triggerNotif({

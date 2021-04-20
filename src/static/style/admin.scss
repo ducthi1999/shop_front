@@ -1,0 +1,16 @@
+#admin-filter {
+  margin-top: 32px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.363);
+  button {
+    padding: 4px 20px;
+    background: none;
+    transform: translateY(1px);
+    background: white;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.363);
+  }
+
+  button.active {
+    border: 1px solid rgba(0, 0, 0, 0.363);
+    border-bottom: 1px solid rgb(255, 255, 255);
+  }
+}

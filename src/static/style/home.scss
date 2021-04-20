@@ -2,6 +2,27 @@
   margin-bottom: 60px;
   padding-bottom: 42px;
   border-bottom: 1px solid rgba(179, 173, 173, 0.301);
+  .admin-btns {
+    display: flex;
+    justify-content: space-between;
+    button {
+      width: 50%;
+      padding: 4px 0;
+      transform: translateY(12px)
+    }
+
+    button:hover {
+      background: rgb(206, 206, 206);
+    }
+
+    button.del {
+      color: red
+    }
+
+    button.pass {
+      color: green
+    }
+  }
   h1.mb-title {
     color: rgb(223, 106, 71);
     text-align: center;

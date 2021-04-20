@@ -38,6 +38,11 @@ const Header = () => {
         payload: notif
       })
     })
+
+    socket.on('create-notif', () => {
+      setAdminNotif(true)
+      setProductNotif(true)
+    })
   }, [])
   return (
     <>

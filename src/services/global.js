@@ -14,11 +14,13 @@ export const register = (userData) => {
 }
 //productS
 export const getAllProducts = (query) => {
-  const { sort, categoryId, sellerId } = query
+  const { sort, categoryId, sellerId, passed } = query
   var url = `/products?`
   if (sort) url = url + `sort=${sort}&`
   if (sellerId) url = url + `seller=${sellerId}&`
   if (categoryId) url = url + `category=${categoryId}&`
+  if (passed) url = url + `passed=${passed}&`
+
   return request(url, "GET")
 }
 
@@ -43,8 +45,12 @@ export const updateProduct = (slug, data) => {
   return request(`/products/${slug}`, 'PUT', data)
 }
 
-export const deleteProduct = (_id) => {
-  return request(`/products/${_id}`, 'DELETE')
+export const deleteProduct = (productId, sellerId) => {
+  return request(`/products/${productId}/${sellerId}`, 'DELETE')
+}
+
+export const passProduct = (productId) => {
+  return request(`/products/${productId}/pass`, 'PUT')
 }
 
 export const searchProduct = (query) => {

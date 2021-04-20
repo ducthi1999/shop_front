@@ -15,6 +15,7 @@ import './static/style/create.scss'
 import './static/style/home.scss'
 import './static/style/sign.scss'
 import './static/style/detail.scss'
+import './static/style/admin.scss'
 import './static/style/profile.scss'
 import './static/style/responsive.scss'
 import Loading from './global/Loading'
@@ -24,16 +25,18 @@ import { getAllProducts } from './services/global'
 import Profile from './pages/profile'
 import TopUp from './pages/credit/Topup'
 import Withdrawals from './pages/credit/Withdrawals'
+import ProductMn from './pages/admin/product'
 
 function App() {
   const dispatch = useDispatch()
   const socket = useSelector(state => state.global.socket)
   const sellerId = useSelector(state => state.global.user._id)
+  const role = useSelector(state => state.global.user.role)
 
   useEffect(() => {
     dispatch(getCategoriesAsync())
-    if(sellerId !== '') {
-      getAllProducts({sellerId})
+    if (sellerId !== '') {
+      getAllProducts({ sellerId })
         .then(res => {
           if (res.data && res.data.status) {
             const newUserProducts = [...res.data.products]
@@ -42,7 +45,10 @@ function App() {
           }
         })
     }
-  }, [sellerId])
+    if (role === 'admin') {
+      socket.emit('join', { rooms: 'admin' })
+    }
+  }, [sellerId, role])
 
   useEffect(() => {
     dispatch(auth())
@@ -69,6 +75,9 @@ function App() {
         </Route>
         <Route path='/profile/:userId'>
           <Profile />
+        </Route>
+        <Route path='/admin/products'>
+          <ProductMn />
         </Route>
         <Route path='/credit/topup'>
           <TopUp />
