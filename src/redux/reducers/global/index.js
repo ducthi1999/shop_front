@@ -50,7 +50,8 @@ const globalReducer = (state = initialState, action) => {
         user: {
           ...state.user,
           userNotif: [
-            ...action.payload
+            ...state.user.userNotif,
+            action.payload
           ]
         }
       }

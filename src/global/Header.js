@@ -26,7 +26,6 @@ const Header = () => {
   const [mbMenu, setMbMenu] = useState(false)
   const [notify, setNotify] = useState(false)
   const [triggerNotif, setTriggerNotif] = useState(false)
-  const [notifyList, setNotifyList] = useState([])
   const [searchModal, setSearchModal] = useState(false)
   const [adminNotif, setAdminNotif] = useState(false)
   const [productNotif, setProductNotif] = useState(false)
@@ -34,9 +33,12 @@ const Header = () => {
   useEffect(() => {
     socket.on('buy-product-notif', notif => {
       setTriggerNotif(true)
-      console.log(notif)
+      dispatch({
+        type: 'UPDATE_NOTIF',
+        payload: notif
+      })
     })
-  })
+  }, [])
   return (
     <>
       <SearchModal status={searchModal} setSearchModal={setSearchModal} />
@@ -66,7 +68,7 @@ const Header = () => {
                       role === 'user' &&
                       <>
                         <div className='header-notify'>
-                          <button onClick={() => {setNotify(!notify); setTriggerNotif(false)}} className='notify-btn'>
+                          <button onClick={() => { setNotify(!notify); setTriggerNotif(false) }} className='notify-btn'>
                             <i className="fas fa-bell"></i>
                             {
                               triggerNotif &&
@@ -277,7 +279,7 @@ const Header = () => {
                 </button>
                 {
                   user.role !== 'admin' &&
-                  <button onClick={() => {setNotify(!notify); setTriggerNotif(false)}} className='notify-btn'>
+                  <button onClick={() => { setNotify(!notify); setTriggerNotif(false) }} className='notify-btn'>
                     <i className="fas fa-bell"></i>
                     {
                       triggerNotif &&

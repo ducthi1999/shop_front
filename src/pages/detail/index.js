@@ -9,28 +9,30 @@ const Detail = () => {
   const data = useSelector(state => state.global.product)
   const user = useSelector(state => state.global.user)
   const socket = useSelector(state => state.global.socket)
-
   const dispatch = useDispatch()
   const { slug } = useParams()
+
 
   useEffect(() => {
     dispatch(getProductAsync(slug))
   })
 
   const buyProduct = () => {
+    const { _id, name } = data
     const newProduct = {
-      ...data,
+      _id,
+      name,
       seller: {
-        ...data.seller,
+        _id: data.seller._id,
         coins: data.seller.coins + data.price
       }
     }
 
     const newUser = {
-      ...user,
-      coins: user.coins + data.price
+      _id: user._id,
+      coins: user.coins - data.price
     }
-    socket.emit('buy-product', { product: newProduct, user: newUser })
+    socket.emit('buy-product', { product: newProduct, user: newUser } )
   }
 
   return (
