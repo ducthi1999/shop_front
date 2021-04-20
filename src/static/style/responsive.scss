@@ -7,11 +7,17 @@
   }
 
   .avt-wrapper {
-    width: 150px !important;
+    width: 64px !important;
   }
 }
 
 @media (max-width: 575.98px) {
+  .game-col h1.mb-title {
+    font-size: 1.5rem;
+  }
+  #mobile .header-container .btn-wrapper button {
+    font-size: 1.2rem;
+  }
   .sign-in-container {
     border: none;
   }
@@ -23,6 +29,9 @@
 }
 
 @media (max-width: 767.98px) {
+  #detail .info .name h1 {
+    font-size: 1.4rem;
+  }
   .game-col .mb-title {
     font-size: 2rem;
   }

@@ -22,6 +22,8 @@ import Update from './pages/update'
 import Detail from './pages/detail'
 import { getAllProducts } from './services/global'
 import Profile from './pages/profile'
+import TopUp from './pages/credit/Topup'
+import Withdrawals from './pages/credit/Withdrawals'
 
 function App() {
   const dispatch = useDispatch()
@@ -68,8 +70,11 @@ function App() {
         <Route path='/profile/:userId'>
           <Profile />
         </Route>
-        <Route path='/products'>
-
+        <Route path='/credit/topup'>
+          <TopUp />
+        </Route>
+        <Route path='/credit/withdrawals'>
+          <Withdrawals />
         </Route>
         <Route path='/:username'>
 

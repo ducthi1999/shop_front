@@ -42,7 +42,28 @@ a {
 }
 
 #loading .loading img {
-  width: 100px;
+  width: 200px;
   aspect-ratio: 1;
   object-fit: cover;
+}
+
+#extra-layout .header {
+  background: rgb(250, 94, 32);
+}
+
+#extra-layout .header h1 {
+  margin: 0;
+  padding: 12px;
+  text-align: center;
+  position: relative;
+}
+
+#extra-layout .header h1 i {
+  position: absolute;
+  left: 32px;
+  color: white;
+}
+
+#extra-layout .header h1 span {
+  color: white;
 }

@@ -105,7 +105,23 @@ const Header = () => {
                                 <i className="fas fa-user"></i>
                                 <span>
                                   Cá nhân
-                            </span>
+                                </span>
+                              </Link>
+                            </li>
+                            <li>
+                              <Link to='/credit/topup'>
+                                <i className="fas fa-coins"></i>
+                                <span>
+                                  Nạp tiền
+                                </span>
+                              </Link>
+                            </li>
+                            <li>
+                              <Link to='/credit/withdrawals'>
+                                <i className="fas fa-money-bill-wave"></i>
+                                <span>
+                                  Rút tiền
+                                </span>
                               </Link>
                             </li>
                             <li>
@@ -138,7 +154,7 @@ const Header = () => {
                   </div>
                 }
                 {
-                  'manh' === 'admin' &&
+                  role === 'admin' &&
                   <button className='admin-btn' onClick={() => { setManageMenu(!manageMenu); setAdminNotif(false) }} style={{ marginLeft: 16 }}>
                     {
                       adminNotif &&

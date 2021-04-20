@@ -49,6 +49,11 @@
 
   .desc {
     margin-top: 32px;
+    .desc-container {
+      img{
+        width: 100%;
+      }
+    }
   }
 }
 
