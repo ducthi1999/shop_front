@@ -26,6 +26,7 @@ import Profile from './pages/profile'
 import TopUp from './pages/credit/Topup'
 import Withdrawals from './pages/credit/Withdrawals'
 import ProductMn from './pages/admin/product'
+import Coin from './pages/admin/coins'
 
 function App() {
   const dispatch = useDispatch()
@@ -78,6 +79,9 @@ function App() {
         </Route>
         <Route path='/admin/products'>
           <ProductMn />
+        </Route>
+        <Route path='/admin/coins'>
+          <Coin />
         </Route>
         <Route path='/credit/topup'>
           <TopUp />

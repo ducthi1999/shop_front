@@ -61,7 +61,7 @@ const Update = () => {
     const cate = cateEl.current.value !== 'choose' && JSON.parse(cateEl.current.value) || null
     const price = priceEl.current.value || product.price
     const seller = product.seller || {}
-    console.log(price)
+
     const data = {
       name, category: cate && cate._id || null, price, image: product.image, desc, seller
     }

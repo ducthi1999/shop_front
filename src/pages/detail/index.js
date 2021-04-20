@@ -19,12 +19,15 @@ const Detail = () => {
 
   const buyProduct = () => {
     const { _id, name } = data
+    const { role, coins } = user
+    if (role === 'admin' || data.seller._id === user._id) return
+    if (coins < data.price) return alert('Bạn không đủ coin')
     const newProduct = {
       _id,
       name,
       seller: {
         _id: data.seller._id,
-        coins: data.seller.coins + data.price
+        coins: parseInt(data.seller.coins) + parseInt(data.price)
       }
     }
 

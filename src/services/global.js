@@ -75,7 +75,11 @@ export const updateUser = (userId, data) => {
   return request(`/${userId}`, 'PUT', data)
 }
 
-export const getUser = (username) => {
-  return request(`/${username}`, 'GET')
+export const getUser = (userId) => {
+  return request(`/${userId}`, 'GET')
+}
+
+export const giveCoins = (userId, coins) => {
+  return request(`/${userId}/${coins}`, 'PUT')
 }
 

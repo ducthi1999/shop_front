@@ -69,7 +69,7 @@ const getCategories = (payload) => {
 export const getAllProductsAsync = (query) => {
   return dispatch => {
     dispatch(toggleLoading(true))
-    console.log(query)
+
     API.getAllProducts(query)
       .then(res => {
         if (res.data && res.data.status) {

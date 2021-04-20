@@ -1,6 +1,8 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'https://gamingshopvn-api.herokuapp.com/api'
+// axios.defaults.baseURL = 'https://gamingshopvn-api.herokuapp.com/api'
+axios.defaults.baseURL = 'http://localhost:3999/api'
+
 
 const request = (endpoint, method, data) => {
   const accessToken = localStorage.getItem('accessToken')

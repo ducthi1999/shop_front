@@ -7,7 +7,6 @@ const ManageFilter = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log(checkPassed)
     dispatch(getAllProductsAsync({ passed: checkPassed }))
   }, [checkPassed])
 

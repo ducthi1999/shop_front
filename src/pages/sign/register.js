@@ -134,7 +134,6 @@ const Register = (props) => {
     }
 
     const submitHandle = (e) => {
-        console.log('submiting')
         if (checkValidate()) {
             const credit = {
                 number: creditNumberEl.current.value,

@@ -10,7 +10,7 @@ import { deleteProduct, passProduct } from '../../services/global'
 const ProductMn = () => {
   const products = useSelector(state => state.global.products)
   const dispatch = useDispatch()
-  console.log(products)
+
   const removeProduct = (item, index) => {
     const { _id, seller } = item
     const sellerId = seller._id

@@ -105,30 +105,35 @@ const Header = () => {
                       <div className='child-menu' hidden={!childMenu}>
                         <div className='child-menu-container'>
                           <ul>
-                            <li>
-                              <Link to={`/profile/1`}>
-                                <i className="fas fa-user"></i>
-                                <span>
-                                  Cá nhân
+                            {
+                              role !== 'admin' &&
+                              <>
+                                <li>
+                                  <Link to={`/profile/1`}>
+                                    <i className="fas fa-user"></i>
+                                    <span>
+                                      Cá nhân
                                 </span>
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to='/credit/topup'>
-                                <i className="fas fa-coins"></i>
-                                <span>
-                                  Nạp tiền
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link to='/credit/topup'>
+                                    <i className="fas fa-coins"></i>
+                                    <span>
+                                      Nạp tiền
                                 </span>
-                              </Link>
-                            </li>
-                            <li>
-                              <Link to='/credit/withdrawals'>
-                                <i className="fas fa-money-bill-wave"></i>
-                                <span>
-                                  Rút tiền
+                                  </Link>
+                                </li>
+                                <li>
+                                  <Link to='/credit/withdrawals'>
+                                    <i className="fas fa-money-bill-wave"></i>
+                                    <span>
+                                      Rút tiền
                                 </span>
-                              </Link>
-                            </li>
+                                  </Link>
+                                </li>
+                              </>
+                            }
                             <li>
                               <Link to='/login'>
                                 <i className="fas fa-sign-out-alt"></i>
@@ -179,7 +184,7 @@ const Header = () => {
                       <div className='child-menu-container'>
                         <ul>
                           <li>
-                            <a onClick={() => setProductNotif(false)} className='manage-product' href='/admin/products'>
+                            <Link onClick={() => setProductNotif(false)} className='manage-product' to='/admin/products'>
                               {
                                 productNotif &&
                                 <span className='manage-notif'></span>
@@ -188,13 +193,13 @@ const Header = () => {
                               <span>
                                 Sản phẩm
                               </span>
-                            </a>
+                            </Link>
                           </li>
                           <li>
-                            <Link to='/admin/users'>
+                            <Link to='/admin/coins'>
                               <i className="fas fa-users"></i>
                               <span>
-                                Người dùng
+                                Chuyển xu
                             </span>
                             </Link>
                           </li>
@@ -221,21 +226,51 @@ const Header = () => {
                     </Link>
                   </li>
                   {
-                    true &&
+                    login &&
                     <>
                       <li>
                         <Link to={`/profile/1`}>
                           <i className="fas fa-user"></i>
                           <span>
                             Cá nhân
-                      </span>
+                          </span>
                         </Link>
                       </li>
                       {
-                        'manh' === 'admin' &&
+                        role !== 'admin' &&
+                        <>
+                          <li>
+                            <Link to={`/profile/1`}>
+                              <i className="fas fa-user"></i>
+                              <span>
+                                Cá nhân
+                                </span>
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to='/credit/topup'>
+                              <i className="fas fa-coins"></i>
+                              <span>
+                                Nạp tiền
+                                </span>
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to='/credit/withdrawals'>
+                              <i className="fas fa-money-bill-wave"></i>
+                              <span>
+                                Rút tiền
+                                </span>
+                            </Link>
+                          </li>
+                        </>
+                      }
+
+                      {
+                        role === 'admin' &&
                         <>
                           <li className='mb-product-manage'>
-                            <a onClick={() => setProductNotif(false)} href='/admin/products'>
+                            <Link onClick={() => setProductNotif(false)} to='/admin/products'>
                               <i className="fas fa-shopping-bag"></i>
                               <span>
                                 Quản lý sản phẩm
@@ -244,15 +279,15 @@ const Header = () => {
                                 productNotif &&
                                 <span className='manage-notif'></span>
                               }
-                            </a>
+                            </Link>
                           </li>
                           <li>
-                            <a href='/admin/users'>
+                            <Link to='/admin/coins'>
                               <i className="fas fa-users"></i>
                               <span>
-                                Quản lý người dùng
+                                Chuyển xu
                               </span>
-                            </a>
+                            </Link>
                           </li>
                         </>
                       }
@@ -299,7 +334,7 @@ const Header = () => {
                   <i className="fas fa-search"></i>
                 </button>
                 {
-                  user.role !== 'admin' &&
+                  role !== 'admin' &&
                   <button onClick={() => { setNotify(!notify); setTriggerNotif(false) }} className='notify-btn'>
                     <i className="fas fa-bell"></i>
                     {
