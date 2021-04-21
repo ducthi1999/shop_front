@@ -109,7 +109,7 @@ const Header = () => {
                               triggerNotif &&
                               <span style={{ color: 'white' }}></span>
                             }
-                            <button>({userNotif.length})</button>
+                            <button>({userNotif && userNotif.length})</button>
                           </button>
                           {
                             notify &&
