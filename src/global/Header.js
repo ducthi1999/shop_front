@@ -123,7 +123,7 @@ const Header = () => {
                       </>
                     }
                     <button onClick={() => setChildMenu(!childMenu)}>
-                      <img src={userImage.url || userImage} />
+                      <img src={ userImage && userImage.url || userImage} />
                       <span>
                         {user.username}
                       </span>
