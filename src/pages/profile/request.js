@@ -22,6 +22,7 @@ const Request = () => {
     const coins = parseInt(el.current.value)
     const newCoins = parseInt(userCoins) - coins
     if (newCoins < 0) return alert('Bạn không đủ tiền')
+    console.log(userId, coins, newCoins)
     socket.emit('request', { userId, coins, newCoins })
 
   }
