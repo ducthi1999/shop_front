@@ -1,11 +1,14 @@
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { useState, useContext, useEffect } from 'react'
 import Notify from './Notify'
-import SearchModal from './SearchModal'
+// import SearchModal from './SearchModal'
 import { useDispatch, useSelector } from 'react-redux'
+import { getRequest } from '../services/global'
+import { toggleLoading } from '../redux/actions'
 
 const Header = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const login = useSelector(state => state.global.login)
   const user = useSelector(state => state.global.user)
   const socket = useSelector(state => state.global.socket)
@@ -26,40 +29,67 @@ const Header = () => {
   const [mbMenu, setMbMenu] = useState(false)
   const [notify, setNotify] = useState(false)
   const [triggerNotif, setTriggerNotif] = useState(false)
-  const [searchModal, setSearchModal] = useState(false)
+  // const [searchModal, setSearchModal] = useState(false)
   const [adminNotif, setAdminNotif] = useState(false)
   const [productNotif, setProductNotif] = useState(false)
+  const [requestNotif, setRequestNotif] = useState(false)
+  const [requests, setRequests] = useState([])
 
   useEffect(() => {
-    socket.on('buy-product-notif', notif => {
+    getRequest()
+      .then(res => {
+        if (res.data && res.data.status) {
+          setRequests(res.data.requests)
+        }
+      })
+      .catch(err => console.log(err))
+
+    socket.on('buy-product-notif', ({ newNotif }) => {
       setTriggerNotif(true)
       dispatch({
         type: 'UPDATE_NOTIF',
-        payload: notif
+        payload: newNotif
       })
     })
 
+    socket.on('change-coins', ({ newCoins }) => {
+      dispatch(toggleLoading(false))
+      const userCoins = parseInt(coins) - parseInt(newCoins)
+      dispatch({
+        type: 'CHANGE_COINS',
+        payload: userCoins
+      })
+    })
     socket.on('create-notif', () => {
       setAdminNotif(true)
       setProductNotif(true)
     })
+
+    socket.on('money-request-notif', () => {
+      setAdminNotif(true)
+      setRequestNotif(true)
+    })
+  }, [])
+
+  useEffect(() => {
+
   }, [])
   return (
     <>
-      <SearchModal status={searchModal} setSearchModal={setSearchModal} />
+      {/* <SearchModal status={searchModal} setSearchModal={setSearchModal} /> */}
       <div id='header'>
         <div className='container'>
           <div id='desktop'>
             <div className='header-container'>
               <div className='avt-wrapper'>
                 <a href='/'>
-                  <img src='/images/logo.png' alt='' />
+                  <img src={'/images/logo.png'} alt='' />
                 </a>
               </div>
               <div className='header-right-wrapper'>
-                <div className='search'>
+                {/* <div className='search'>
                   <i onClick={() => setSearchModal(true)} style={{ color: 'black', fontSize: '1.1rem', marginRight: 12, cursor: 'pointer' }} className="fas fa-search"></i>
-                </div>
+                </div> */}
                 <Link to='/products/create'>
                   <i className="fas fa-gamepad"></i>
                   <span>
@@ -79,6 +109,7 @@ const Header = () => {
                               triggerNotif &&
                               <span style={{ color: 'white' }}></span>
                             }
+                            <button>({userNotif.length})</button>
                           </button>
                           {
                             notify &&
@@ -92,7 +123,7 @@ const Header = () => {
                       </>
                     }
                     <button onClick={() => setChildMenu(!childMenu)}>
-                      <img src='/images/user_default_img.png' />
+                      <img src={userImage.url || userImage} />
                       <span>
                         {user.username}
                       </span>
@@ -109,7 +140,7 @@ const Header = () => {
                               role !== 'admin' &&
                               <>
                                 <li>
-                                  <Link to={`/profile/1`}>
+                                  <Link to={`/profile/${user._id}`}>
                                     <i className="fas fa-user"></i>
                                     <span>
                                       Cá nhân
@@ -117,7 +148,7 @@ const Header = () => {
                                   </Link>
                                 </li>
                                 <li>
-                                  <Link to='/credit/topup'>
+                                  <Link to='/profile/request'>
                                     <i className="fas fa-coins"></i>
                                     <span>
                                       Nạp tiền
@@ -125,7 +156,7 @@ const Header = () => {
                                   </Link>
                                 </li>
                                 <li>
-                                  <Link to='/credit/withdrawals'>
+                                  <Link to='/profile/request'>
                                     <i className="fas fa-money-bill-wave"></i>
                                     <span>
                                       Rút tiền
@@ -203,6 +234,19 @@ const Header = () => {
                             </span>
                             </Link>
                           </li>
+                          <li style={{ position: 'relative' }} onClick={() => setRequestNotif(false)}>
+                            <Link to='/admin/request'>
+                              {
+                                requestNotif &&
+                                <span className='manage-notif'></span>
+                              }
+                              <i className="fas fa-money-bill-wave"></i>
+                              <span>
+                                Yêu cầu rút tiền
+                              </span>
+                              <span>({requests.length})</span>
+                            </Link>
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -229,7 +273,7 @@ const Header = () => {
                     login &&
                     <>
                       <li>
-                        <Link to={`/profile/1`}>
+                        <Link to={`/profile/${user._id}`}>
                           <i className="fas fa-user"></i>
                           <span>
                             Cá nhân
@@ -240,7 +284,7 @@ const Header = () => {
                         role !== 'admin' &&
                         <>
                           <li>
-                            <Link to={`/profile/1`}>
+                            <Link to={`/profile/${user._id}`}>
                               <i className="fas fa-user"></i>
                               <span>
                                 Cá nhân
@@ -256,7 +300,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li>
-                            <Link to='/credit/withdrawals'>
+                            <Link to='/profile/request'>
                               <i className="fas fa-money-bill-wave"></i>
                               <span>
                                 Rút tiền
@@ -287,6 +331,15 @@ const Header = () => {
                               <span>
                                 Chuyển xu
                               </span>
+                            </Link>
+                          </li>
+                          <li>
+                            <Link to='/admin/request'>
+                              <i className="fas fa-money-bill-wave"></i>
+                              <span>
+                                Yêu cầu rút tiền
+                            </span>
+                              <span>({requests.length})</span>
                             </Link>
                           </li>
                         </>
@@ -330,9 +383,9 @@ const Header = () => {
                 </a>
               </div>
               <div className='btn-wrapper'>
-                <button className='mb-search' onClick={() => setSearchModal(true)}>
+                {/* <button className='mb-search' onClick={() => setSearchModal(true)}>
                   <i className="fas fa-search"></i>
-                </button>
+                </button> */}
                 {
                   role !== 'admin' &&
                   <button onClick={() => { setNotify(!notify); setTriggerNotif(false) }} className='notify-btn'>

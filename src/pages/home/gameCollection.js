@@ -48,9 +48,9 @@ const GameCollection = ({ category }) => {
                 </div>
               </div>
             </div>
-            <div className='see-more'>
+            {/* <div className='see-more'>
               <Link to='/product/:cateogry' className='see-more-btn'>Xem tất cả</Link>
-            </div>
+            </div> */}
           </div>
         </div>
       }

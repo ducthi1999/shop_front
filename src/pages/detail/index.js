@@ -2,7 +2,7 @@ import MainLayout from "../../layouts/MainLayout"
 import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { getProductAsync } from "../../redux/actions"
+import { getProductAsync, toggleLoading } from "../../redux/actions"
 import Breadcrumb from '../../global/Breadcrumb'
 
 const Detail = () => {
@@ -18,13 +18,14 @@ const Detail = () => {
   })
 
   const buyProduct = () => {
-    const { _id, name } = data
+    const { _id, name, price } = data
     const { role, coins } = user
     if (role === 'admin' || data.seller._id === user._id) return
     if (coins < data.price) return alert('Bạn không đủ coin')
     const newProduct = {
       _id,
       name,
+      price,
       seller: {
         _id: data.seller._id,
         coins: parseInt(data.seller.coins) + parseInt(data.price)
@@ -35,7 +36,8 @@ const Detail = () => {
       _id: user._id,
       coins: user.coins - data.price
     }
-    socket.emit('buy-product', { product: newProduct, user: newUser } )
+    dispatch(toggleLoading(true))
+    socket.emit('buy-product', { product: newProduct, user: newUser })
   }
 
   return (
@@ -48,13 +50,22 @@ const Detail = () => {
           </div>
           <div className='info'>
             <div className='name'>
-              <h1>{data.name}</h1>
+              <h1>ingame: {data.name}</h1>
             </div>
+            {
+              data.sold &&
+              <div className='name'>
+                <h1>password: {data.password}</h1>
+              </div>
+            }
             <div className='price'>
-              <button onClick={buyProduct}>
-                <i className="fas fa-coins"></i>
-                <span>{data.price} coins</span>
-              </button>
+              {
+                !data.sold &&
+                <button onClick={buyProduct}>
+                  <i className="fas fa-coins"></i>
+                  <span>{data.price} coins</span>
+                </button>
+              }
               <Link to=''><i className="fas fa-user-astronaut"></i>{data.seller && `${data.seller.firstName} ${data.seller.lastName}`}</Link>
             </div>
             <div className='desc'>

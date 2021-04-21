@@ -1,11 +1,13 @@
-import { useEffect, useState, useRef, useContext } from 'react'
-import { Link, useHistory, useParams } from 'react-router-dom'
-import getImage from '../../utils/getImage'
+import { useEffect, useState, useRef } from 'react'
+import { Link, useParams } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { getUser, updateAvt, updateUser } from '../../services/global'
+import { toggleLoading } from '../../redux/actions'
 
-const Profile = (props) => {
-
+const Profile = () => {
   const { userId } = useParams()
-  const history = useHistory()
+  const currentUser = useSelector(state => state.global.user._id)
+  const dispatch = useDispatch()
 
   const firstNameEl = useRef(null)
   const lastNameEl = useRef(null)
@@ -23,7 +25,6 @@ const Profile = (props) => {
   const [newPassErr, setNewPassErr] = useState(false)
   const [confirmPassErr, setConfirmPassErr] = useState(false)
   const [changingPass, setChangingPass] = useState(false)
-  const [origin, setOrigin] = useState(false)
 
   const handleOldPass = (e) => {
     let value = e.target.value
@@ -86,7 +87,6 @@ const Profile = (props) => {
     const newPass = newPassEl.current.value && newPassEl.current.value.length > 5 && newPassEl.current.value || null
 
     const data = {
-      file,
       firstName,
       lastName,
       phone,
@@ -96,26 +96,52 @@ const Profile = (props) => {
     }
 
     if (!oldPassErr && !newPassErr && !confirmPassErr) {
-
+      dispatch(toggleLoading(true))
+      updateUser(userId, data)
+        .then(res => {
+          if (res.data && res.data.status) {
+            alert('Thay đổi thông tin thành công')
+          } else {
+            alert('Thay đổi thông tin thất bại')
+          }
+        })
+        .catch(err => alert('Lỗi'))
+        .then(() => {
+          dispatch(toggleLoading(false))
+        })
     }
   }
 
   const changeAvt = () => {
-    const formData = new FormData()
-    formData.append('file', file)
-    formData.append('oldFile', user.image)
+    const data = {
+      oldImage: user.image,
+      newImage: file
+    }
 
-
+    dispatch(toggleLoading(true))
+    updateAvt(userId, data)
+      .then(res => {
+        if (res.data && res.data.status) {
+          alert('Thay đổi avt thành công')
+        } else {
+          alert('Thay đổi avt thất bại')
+        }
+      })
+      .catch(err => alert('Lỗi'))
+      .then(() => {
+        dispatch(toggleLoading(false))
+        window.location.reload()
+      })
   }
 
   const handleAvtChange = (e) => {
     const selectedFile = e.target.files[0]
-    setFile(selectedFile)
 
     const reader = new FileReader()
     reader.onloadend = (e) => {
       const url = reader.result
       getData({ name: 'manh', path: url })
+      setFile(url)
     }
 
     if (selectedFile && selectedFile.type.match('image.*')) {
@@ -124,13 +150,18 @@ const Profile = (props) => {
   }
 
   useEffect(() => {
-
+    getUser(userId)
+      .then(res => {
+        if (res.data && res.data.status) {
+          setUser(res.data.userData)
+        }
+      })
   }, [])
 
   return (
     <div className='profile'>
       {
-        origin &&
+        currentUser === user._id &&
         <div className='edit-form' hidden={!changeForm}>
           <button onClick={() => setChangeForm(false)} className='back-btn'>
             <i className="fas fa-times"></i>
@@ -168,9 +199,9 @@ const Profile = (props) => {
         <div className='profile-body'>
           <div className='body-user-info'>
             <div className='avt-wrapper'>
-              <img src={file ? data.path : getImage(user && user.image)} />
+              <img src={file ? data.path : user && user.image?.url || user.image} />
               {
-                origin &&
+                currentUser === user._id &&
                 <label htmlFor='change-avt' className='change-avt'>
                   <i className="fas fa-camera"></i>
                   <input id='change-avt' onChange={handleAvtChange} type='file' placeholder='avatar' />
@@ -187,14 +218,18 @@ const Profile = (props) => {
                 <a style={{ color: 'green' }} href={`tel:${user && user.phone}`}>Call: {user && user.phone}</a>
               </div>
               <div className='email'>
-                <p style={{ fontFamily: 'fontLight' }}>Email: {user && user.email}</p>
+                <p style={{ fontFamily: 'mainFont' }}>Email: {user && user.email}</p>
               </div>
-              <div className='post-data'>
-                <a href={`/profile/${userId}/products`}>Products</a>
-              </div>
+              {
+                currentUser === user._id &&
+                <div className='post-data'>
+                  <a href={`/profile/${userId}/bought`}>Đã mua</a>
+                </div>
+              }
+
             </div>
             {
-              origin &&
+              currentUser === user._id &&
               <div className='option'>
                 <button className='setting' onClick={() => setChangeForm(true)}>
                   <i className="fas fa-user-edit"></i>

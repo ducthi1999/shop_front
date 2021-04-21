@@ -6,9 +6,9 @@ const ExtraLayout = ({ children, category }) => {
       <div className='layout-container'>
         <div className='header'>
           <h1>
-            <Link to='/'>
+            <a href='/'>
               <i className="fas fa-home"></i>
-            </Link>
+            </a>
             <span>{category}</span>
           </h1>
         </div>

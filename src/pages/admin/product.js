@@ -12,10 +12,10 @@ const ProductMn = () => {
   const dispatch = useDispatch()
 
   const removeProduct = (item, index) => {
-    const { _id, seller } = item
+    const { _id, seller, image } = item
     const sellerId = seller._id
     dispatch(toggleLoading(true))
-    deleteProduct(_id, sellerId)
+    deleteProduct(_id, sellerId, image)
       .then(res => {
         if (res.data && res.data.status) {
           const newProducts = products.filter(x => x._id !== _id)

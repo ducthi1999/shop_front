@@ -19,6 +19,7 @@ const initialState = {
     firstName: '',
     lastName: '',
     role: null,
+    request: [],
     userImage: null,
     notif: {},
     userNotif: [],
@@ -67,6 +68,16 @@ const globalReducer = (state = initialState, action) => {
       }
     }
 
+    case 'CHANGE_COINS': {
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          coins: action.payload
+        }
+      }
+    }
+
     case 'GET_ALL_PRODUCTS': {
       return {
         ...state,
@@ -84,7 +95,7 @@ const globalReducer = (state = initialState, action) => {
     }
 
     case 'GET_USER_DATA': {
-      const { login, firstName, _id, credit, image, lastName, coins, role, token, notif, bought, username, phone } = action.payload
+      const { login, firstName, request, _id, credit, image, lastName, coins, role, token, notif, bought, username, phone } = action.payload
       localStorage.setItem('accessToken', token)
       return {
         ...state,
@@ -92,6 +103,7 @@ const globalReducer = (state = initialState, action) => {
         user: {
           _id,
           username,
+          request,
           firstName,
           lastName,
           role,
@@ -107,7 +119,7 @@ const globalReducer = (state = initialState, action) => {
 
     case 'AUTHENTICATION': {
       const { login, user } = action.payload
-      const { firstName, image, _id, credit, lastName, coins, role, notif, bought, username, phone } = user
+      const { firstName, request, image, _id, credit, lastName, coins, role, notif, bought, username, phone } = user
       return {
         ...state,
         login: login,
@@ -119,6 +131,7 @@ const globalReducer = (state = initialState, action) => {
           role,
           coins,
           credit,
+          request,
           userNotif: notif,
           userBought: bought,
           userImage: image,
@@ -142,6 +155,7 @@ const globalReducer = (state = initialState, action) => {
             number: '',
             bank: ''
           },
+          request: [],
           userNotif: [],
           userBought: [],
           userImage: null,

@@ -66,3 +66,22 @@
     }
   }
 }
+
+#admin-request {
+  ul {
+    margin: 0;
+    padding: 0;
+    margin-top: 32px;
+    li {
+      list-style: none;
+      padding: 16px 12px;
+      border-bottom: 1px solid black;
+      position: relative; 
+      button {
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
+  }
+}

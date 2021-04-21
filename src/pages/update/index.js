@@ -16,11 +16,13 @@ const Update = () => {
   const [file, setFile] = useState(null)
   const [data, getData] = useState({ name: '', path: '/images/product_default_img.png' })
   const [desc, setDesc] = useState('Đang cập nhật...')
+  const [pass, setPass] = useState('')
   const [product, setProduct] = useState({})
 
   const nameEl = useRef(null)
   const cateEl = useRef(null)
   const priceEl = useRef(null)
+  const passEl = useRef(null)
 
   useEffect(() => {
     dispatch(toggleLoading(true))
@@ -60,10 +62,11 @@ const Update = () => {
     const name = nameEl.current.value.trim().length > 0 && nameEl.current.value.trim() || product.name
     const cate = cateEl.current.value !== 'choose' && JSON.parse(cateEl.current.value) || null
     const price = priceEl.current.value || product.price
+    const password = passEl.current.value || product.password
     const seller = product.seller || {}
 
     const data = {
-      name, category: cate && cate._id || null, price, image: product.image, desc, seller
+      name, password, category: cate && cate._id || null, price, image: product.image, desc, seller
     }
     if (file) {
       data.newImage = file
@@ -99,6 +102,10 @@ const Update = () => {
                 <div className='create-name'>
                   <label htmlFor='create_name'>Tên: </label>
                   <input required ref={nameEl} id='create_name' defaultValue={product.name} />
+                </div>
+                <div className='create-name'>
+                  <label htmlFor='create_password'>Mật khẩu: </label>
+                  <input required ref={passEl} id='create_password' defaultValue={product.password} />
                 </div>
                 <div className='create-category'>
                   <div>

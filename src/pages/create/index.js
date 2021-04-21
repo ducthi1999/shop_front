@@ -22,7 +22,7 @@ const Create = () => {
   const nameEl = useRef(null)
   const cateEl = useRef(null)
   const priceEl = useRef(null)
-  const descEl = useRef(null)
+  const passEl = useRef(null)
 
   useEffect(() => {
     if (!login) {
@@ -52,9 +52,9 @@ const Create = () => {
     const name = nameEl.current.value.trim()
     const cate = cateEl.current.value !== 'choose' && JSON.parse(cateEl.current.value) || null
     const price = priceEl.current.value
-
+    const password = passEl.current.value
     const data = {
-      name, category: cate && cate._id || null, price, image: file, desc
+      name, category: cate && cate._id || null, price, image: file, desc, password
     }
 
     dispatch(toggleLoading(true))
@@ -92,6 +92,10 @@ const Create = () => {
                   <div className='create-name'>
                     <label htmlFor='create_name'>Tên: </label>
                     <input required ref={nameEl} id='create_name' />
+                  </div>
+                  <div className='create-name'>
+                    <label htmlFor='create_pass'>Mật khẩu: </label>
+                    <input required ref={passEl} id='create_pass' />
                   </div>
                   <div className='create-category'>
                     <div>

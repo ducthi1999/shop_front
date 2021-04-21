@@ -23,10 +23,11 @@ import Update from './pages/update'
 import Detail from './pages/detail'
 import { getAllProducts } from './services/global'
 import Profile from './pages/profile'
-import TopUp from './pages/credit/Topup'
-import Withdrawals from './pages/credit/Withdrawals'
 import ProductMn from './pages/admin/product'
 import Coin from './pages/admin/coins'
+import Request from './pages/profile/request'
+import MoneyRequest from './pages/admin/moneyRequest'
+import BoughtProduct from './pages/profile/boughtProduct'
 
 function App() {
   const dispatch = useDispatch()
@@ -74,6 +75,12 @@ function App() {
         <Route path='/products/:slug'>
           <Detail />
         </Route>
+        <Route path='/profile/:userId/bought'>
+          <BoughtProduct />
+        </Route>
+        <Route path='/profile/request'>
+          <Request />
+        </Route>
         <Route path='/profile/:userId'>
           <Profile />
         </Route>
@@ -83,14 +90,8 @@ function App() {
         <Route path='/admin/coins'>
           <Coin />
         </Route>
-        <Route path='/credit/topup'>
-          <TopUp />
-        </Route>
-        <Route path='/credit/withdrawals'>
-          <Withdrawals />
-        </Route>
-        <Route path='/:username'>
-
+        <Route path='/admin/request'>
+          <MoneyRequest />
         </Route>
         <Route path='/'>
           <Home />

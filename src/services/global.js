@@ -29,10 +29,11 @@ export const getOneProduct = (slug) => {
 }
 
 export const createProduct = (data) => {
-  const { name, price, desc, image, category } = data
+  const { name, password, price, desc, image, category } = data
   const formData = new FormData()
 
   formData.append('name', name || null)
+  formData.append('password', password || null)
   formData.append('price', price || null)
   formData.append('desc', desc || null)
   formData.append('image', image || null)
@@ -45,8 +46,8 @@ export const updateProduct = (slug, data) => {
   return request(`/products/${slug}`, 'PUT', data)
 }
 
-export const deleteProduct = (productId, sellerId) => {
-  return request(`/products/${productId}/${sellerId}`, 'DELETE')
+export const deleteProduct = (productId, sellerId, image) => {
+  return request(`/products/${productId}/${sellerId}`, 'DELETE', image )
 }
 
 export const passProduct = (productId) => {
@@ -71,8 +72,12 @@ export const createUser = (data) => {
   return request('/register', 'product', data)
 }
 
-export const updateUser = (userId, data) => {
-  return request(`/${userId}`, 'PUT', data)
+export const updateUser = (id, data) => {
+  return request(`/${id}`, 'PUT', data)
+}
+
+export const updateAvt = (id, data) => {
+  return request(`/${id}/avt`, 'PUT', data)
 }
 
 export const getUser = (userId) => {
@@ -83,3 +88,10 @@ export const giveCoins = (userId, coins) => {
   return request(`/${userId}/${coins}`, 'PUT')
 }
 
+export const getRequest = () => {
+  return request('/requests', 'GET')
+}
+
+export const removeRequest = (requestId) => {
+  return request(`/requests/${requestId}`, 'DELETE')
+}
