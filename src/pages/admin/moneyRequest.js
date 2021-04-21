@@ -51,10 +51,10 @@ const MoneyRequest = () => {
                   <li key={item._id}>
                     <div>
                       <h5>Yêu cầu {index + 1}</h5>
-                      <p>Tên: {item && `${item.user.firstName} ${item.user.lastName}`}</p>
+                      <p>Tên: {item && `${item.user && item.user.firstName} ${item.user && item.user.lastName}`}</p>
                       <p>Mã tài khoản: {item._id}</p>
                       <p>Số xu muốn rút: {item && item.coins}</p>
-                      <p>STK: {item.user && `${item.user.credit.number} - ${item.user.credit.bank}`}</p>
+                      <p>STK: {item.user && `${item.user && item.user.credit.number} - ${item.user && item.user.credit.bank}`}</p>
                     </div>
                     <button onClick={() => confirm(item)}>Xác nhận đã chuyển khoản</button>
                   </li>
