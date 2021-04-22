@@ -81,7 +81,7 @@ export const updateAvt = (id, data) => {
 }
 
 export const getUser = (userId, userRole) => {
-  return request(`/${userId}/${userRole}`, 'GET')
+  return request(`/${userId}/${userRole || 'null'}`, 'GET')
 }
 
 export const giveCoins = (userId, coins) => {
