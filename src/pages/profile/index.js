@@ -150,7 +150,7 @@ const Profile = () => {
   }
 
   useEffect(() => {
-    getUser(userId)
+    getUser(userId, null)
       .then(res => {
         if (res.data && res.data.status) {
           setUser(res.data.userData)
