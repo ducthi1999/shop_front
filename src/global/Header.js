@@ -33,16 +33,8 @@ const Header = () => {
   const [adminNotif, setAdminNotif] = useState(false)
   const [productNotif, setProductNotif] = useState(false)
   const [requestNotif, setRequestNotif] = useState(false)
-  const [requests, setRequests] = useState([])
 
   useEffect(() => {
-    getRequest()
-      .then(res => {
-        if (res.data && res.data.status) {
-          setRequests(res.data.requests)
-        }
-      })
-      .catch(err => console.log(err))
 
     socket.on('buy-product-notif', ({ newNotif }) => {
       setTriggerNotif(true)
@@ -123,7 +115,7 @@ const Header = () => {
                       </>
                     }
                     <button onClick={() => setChildMenu(!childMenu)}>
-                      <img src={ userImage && userImage.url || userImage} />
+                      <img src={userImage && userImage.url || userImage} />
                       <span>
                         {user.username}
                       </span>
@@ -148,7 +140,7 @@ const Header = () => {
                                   </Link>
                                 </li>
                                 <li>
-                                  <Link to='/profile/request'>
+                                  <Link to='/profile/topup'>
                                     <i className="fas fa-coins"></i>
                                     <span>
                                       Nạp tiền
@@ -244,7 +236,6 @@ const Header = () => {
                               <span>
                                 Yêu cầu rút tiền
                               </span>
-                              <span>({requests.length})</span>
                             </Link>
                           </li>
                         </ul>
@@ -292,7 +283,7 @@ const Header = () => {
                             </Link>
                           </li>
                           <li>
-                            <Link to='/credit/topup'>
+                            <Link to='/profile/topup'>
                               <i className="fas fa-coins"></i>
                               <span>
                                 Nạp tiền
@@ -339,7 +330,6 @@ const Header = () => {
                               <span>
                                 Yêu cầu rút tiền
                             </span>
-                              <span>({requests.length})</span>
                             </Link>
                           </li>
                         </>

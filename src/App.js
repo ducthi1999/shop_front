@@ -28,6 +28,7 @@ import Coin from './pages/admin/coins'
 import Request from './pages/profile/request'
 import MoneyRequest from './pages/admin/moneyRequest'
 import BoughtProduct from './pages/profile/boughtProduct'
+import Topup from './pages/profile/topup'
 
 function App() {
   const dispatch = useDispatch()
@@ -80,6 +81,9 @@ function App() {
         </Route>
         <Route path='/profile/request'>
           <Request />
+        </Route>
+        <Route path='/profile/topup'>
+          <Topup />
         </Route>
         <Route path='/profile/:userId'>
           <Profile />

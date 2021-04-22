@@ -80,8 +80,8 @@ export const updateAvt = (id, data) => {
   return request(`/${id}/avt`, 'PUT', data)
 }
 
-export const getUser = (userId) => {
-  return request(`/${userId}`, 'GET')
+export const getUser = (userId, userRole) => {
+  return request(`/${userId}/${userRole}`, 'GET')
 }
 
 export const giveCoins = (userId, coins) => {
