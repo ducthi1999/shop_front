@@ -24,6 +24,8 @@ const BoughtProduct = () => {
                   <li>
                     <div>
                       <h5>Tên tài khoản: {item.name}</h5>
+                      <h5>Game: {item.category?.title || 'Đang cập nhật'}</h5>
+                      <h5>Mật khẩu: {item.password || 'Đang cập nhật'}</h5>
                       <h6>Giá: {item.price}</h6>
                     </div>
                   </li>

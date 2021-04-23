@@ -44,7 +44,7 @@ const Detail = () => {
     <MainLayout>
       <div id='detail'>
         <div className='container'>
-          <Breadcrumb />
+          <Breadcrumb category={data?.category?.title || 'Đang cập nhật'} item={data?.name || 'Đang cập nhật'} />
           <div className='detail-banner'>
             <img src={data.image && data.image.url} />
           </div>

@@ -75,6 +75,7 @@ const Login = (props) => {
       dispatch(toggleLoading(true))
       loginAuth(userData)
         .then(res => {
+          console.log(res)
           if (res.data && res.data.status) {
             dispatch(getUserData({
               ...res.data.user,
@@ -108,17 +109,17 @@ const Login = (props) => {
           <h1 className='sign-in-title'>Welcome!</h1>
         </div>
         <form onSubmit={(e) => submitHandle(e)} id='sign-up-form'>
-          <label htmlFor='username'>Username: </label>
-          <input onChange={(e) => usernameValidation(e)} className={usernameErr ? 'validate-error' : ''} required id='username' placeholder='Enter your Username' name='username' />
-          <label htmlFor='password'>Password: </label>
+          <label htmlFor='username'>Tên đang nhập: </label>
+          <input onChange={(e) => usernameValidation(e)} className={usernameErr ? 'validate-error' : ''} required id='username' placeholder='Tên đăng nhập của bạn' name='username' />
+          <label htmlFor='password'>Mật khẩu: </label>
           <input onChange={(e) => passValidation(e)} required type='password' placeholder='******' id='password' name='password' />
           <Link className='link-to-sign-in' to='/forget'>
-            Forgot password?
+            Quên mật khẩu?
                     </Link>
           <div className='form-btn'>
             <button disabled={!login} type='submit' className={login ? 'sign-btn active' : 'sign-btn'}>
-              Sign in
-                        </button>
+              Đăng nhập
+            </button>
           </div>
           <div className='form-auths'>
             <Link to='/' className='fb'>
@@ -130,7 +131,7 @@ const Login = (props) => {
           </div>
         </form>
         <Link to='/register' className='link-to-sign-in'>
-          You don't have an account? Register here!
+          Bạn chưa có tài khoản? Đăng ký ngay!
                 </Link>
       </div>
     </>

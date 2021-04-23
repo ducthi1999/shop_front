@@ -183,31 +183,31 @@ const Register = (props) => {
                     <h1 className='sign-in-title'>Welcome!</h1>
                 </div>
                 <form onSubmit={(e) => submitHandle(e)} id='sign-in-form'>
-                    <span style={{ fontFamily: 'mainFont' }}>Full name:</span>
+                    <span style={{ fontFamily: 'mainFont' }}>Họ Tên:</span>
                     <div className='form-name'>
-                        <input onChange={(e) => firstNameValidation(e)} className={firstNameErr ? 'validate-error' : ''} required name='firstName' placeholder='First name' />
-                        <input onChange={(e) => lastNameValidation(e)} className={lastNameErr ? 'validate-error' : ''} required name='lastName' placeholder='Last name' />
+                        <input onChange={(e) => firstNameValidation(e)} className={firstNameErr ? 'validate-error' : ''} required name='firstName' placeholder='Tên' />
+                        <input onChange={(e) => lastNameValidation(e)} className={lastNameErr ? 'validate-error' : ''} required name='lastName' placeholder='Họ' />
                     </div>
                     <label htmlFor='email'>Email: </label>
                     <input onChange={(e) => emailValidation(e)} className={emailErr ? 'validate-error' : ''} required id='email' placeholder='example@email.com' name='email' />
-                    <label htmlFor='phone'>Phone Number: </label>
+                    <label htmlFor='phone'>Số điện thoại: </label>
                     <input onChange={phoneNumberValidate} className={phoneNumberErr ? 'validate-error' : ''} required id='phone' placeholder='+84...' name='phone' />
-                    <label htmlFor='credit_number'>Credit Number: </label>
-                    <input required id='credit_number' ref={creditNumberEl} placeholder='account number or card' name='credit-number' />
-                    <label htmlFor='bank'>Bank: </label>
-                    <input required ref={bankEl} id='bank' placeholder='bank you use' name='bank' />
-                    <label htmlFor='username'>Username: </label>
-                    <input onChange={(e) => usernameValidation(e)} className={usernameErr ? 'validate-error' : ''} required id='username' placeholder='username123' name='username' />
-                    <label htmlFor='password'>Password: </label>
-                    <input onChange={(e) => getPrePass(e)} required type='password' placeholder='a-z, 0-9, at least 6 characters' id='password' name='password' />
-                    <label htmlFor='re-password'>Confirm Password: </label>
+                    <label htmlFor='credit_number'>Số tài khoản: </label>
+                    <input required id='credit_number' ref={creditNumberEl} placeholder='Số tài khoản hoặc số thẻ' name='credit-number' />
+                    <label htmlFor='bank'>Ngân hàng: </label>
+                    <input required ref={bankEl} id='bank' placeholder='Tên ngân hàng' name='bank' />
+                    <label htmlFor='username'>Tên đăng nhập: </label>
+                    <input onChange={(e) => usernameValidation(e)} className={usernameErr ? 'validate-error' : ''} required id='username' placeholder='ex: username123' name='username' />
+                    <label htmlFor='password'>Mật khẩu: </label>
+                    <input onChange={(e) => getPrePass(e)} required type='password' placeholder='a-z, 0-9, ít nhất 6 kí tự.' id='password' name='password' />
+                    <label htmlFor='re-password'>Xác nhận mật khẩu: </label>
                     <input onChange={(e) => confirmPass(e)} required className={passCheck ? 'validate-error' : ''} type='password' id='re-password' placeholder='******' name='rePassword' />
                     <div className='form-btn'>
                         <Link to='/login' className='sign-btn'>
-                            Login
+                            Đăng nhập
                         </Link>
                         <button className='sign-btn active'>
-                            Register
+                            Đăng ký
                         </button>
                     </div>
 

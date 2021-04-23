@@ -48,7 +48,7 @@ const ProductMn = () => {
     <MainLayout>
       <div className='game-col'>
         <div className='container'>
-          <Breadcrumb />
+          <Breadcrumb category='Quản lý sản phẩm' />
           <ManageFilter />
           <div style={{ marginTop: 12 }} className='game-container'>
             <div className='game-accounts'>

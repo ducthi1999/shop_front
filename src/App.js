@@ -29,6 +29,7 @@ import Request from './pages/profile/request'
 import MoneyRequest from './pages/admin/moneyRequest'
 import BoughtProduct from './pages/profile/boughtProduct'
 import Topup from './pages/profile/topup'
+import Category from './pages/category'
 
 function App() {
   const dispatch = useDispatch()
@@ -66,6 +67,9 @@ function App() {
         </Route>
         <Route path='/register'>
           <Register />
+        </Route>
+        <Route path='/category/:category'>
+          <Category />
         </Route>
         <Route path='/products/:slug/update'>
           <Update />

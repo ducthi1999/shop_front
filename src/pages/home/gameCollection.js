@@ -21,36 +21,44 @@ const GameCollection = ({ category }) => {
                 {category && category.title}
               </h1>
               <div className='game-banner'>
-                <img src={category && category.image} />
+                <Link to={`/category/${category._id}`}>
+                  <img src={category && category.image} />
+                </Link>
               </div>
               <div className='game-accounts'>
                 <div className='row'>
                   {
-                    currentProducts.map(item =>
-                      <div key={item._id} className='col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6'>
-                        <div className='account-container'>
-                          <div className='cover'>
-                            <Link to={`/products/${item.slug}`}>
-                              <img src={item.image && item.image.url} />
-                            </Link>
-                          </div>
-                          <div className='info'>
-                            <Link to={`/products/${item.slug}`}>{item.name || 'Đăng cập nhật...'}</Link>
-                            <div className='wrap'>
-                              <span><i className="fas fa-coins"></i>{item.price}</span>
-                              <Link to=''><i style={{marginRight: 6}} className="fas fa-user-astronaut"/>{item.seller && `${item.seller.firstName} ${item.seller.lastName}`}</Link>
+                    currentProducts.map((item, index) => {
+                      if (index < 4) return (
+                        <div key={item._id} className='col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6'>
+                          <div className='account-container'>
+                            <div className='cover'>
+                              <Link to={`/products/${item.slug}`}>
+                                <img src={item.image && item.image.url} />
+                              </Link>
+                            </div>
+                            <div className='info'>
+                              <Link to={`/products/${item.slug}`}>{item.name || 'Đăng cập nhật...'}</Link>
+                              <div className='wrap'>
+                                <span><i className="fas fa-coins"></i>{item.price}</span>
+                                <Link to=''><i style={{ marginRight: 6 }} className="fas fa-user-astronaut" />{item.seller && `${item.seller.firstName} ${item.seller.lastName}`}</Link>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
+                      )
+                    }
                     )
                   }
                 </div>
               </div>
             </div>
-            {/* <div className='see-more'>
-              <Link to='/product/:cateogry' className='see-more-btn'>Xem tất cả</Link>
-            </div> */}
+            {
+              currentProducts.length >= 4 &&
+              < div className='see-more'>
+                <Link to={`/category/${category._id}`} className='see-more-btn'>Xem tất cả ({currentProducts.length})</Link>
+              </div>
+            }
           </div>
         </div>
       }
