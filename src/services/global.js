@@ -29,7 +29,7 @@ export const getOneProduct = (slug) => {
 }
 
 export const createProduct = (data) => {
-  const { name, password, price, desc, image, category } = data
+  const { name, password, price, desc, image, category, mode } = data
   const formData = new FormData()
 
   formData.append('name', name || null)
@@ -38,6 +38,7 @@ export const createProduct = (data) => {
   formData.append('desc', desc || null)
   formData.append('image', image || null)
   formData.append('category', category || null)
+  formData.append('mode', mode || 0)
 
   return request('/products', 'POST', formData)
 }

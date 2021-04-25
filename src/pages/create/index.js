@@ -18,11 +18,13 @@ const Create = () => {
   const [file, setFile] = useState(null)
   const [data, getData] = useState({ name: '', path: '/images/product_default_img.png' })
   const [desc, setDesc] = useState('')
+  const [checked, setChecked] = useState(false);
 
   const nameEl = useRef(null)
   const cateEl = useRef(null)
   const priceEl = useRef(null)
   const passEl = useRef(null)
+  const modeEl = useRef(null)
 
   useEffect(() => {
     if (!login) {
@@ -53,8 +55,9 @@ const Create = () => {
     const cate = cateEl.current.value !== 'choose' && JSON.parse(cateEl.current.value) || null
     const price = priceEl.current.value
     const password = passEl.current.value
+    const mode = checked
     const data = {
-      name, category: cate && cate._id || null, price, image: file, desc, password
+      name, category: cate && cate._id || null, price, image: file, desc, password, mode
     }
 
     dispatch(toggleLoading(true))
@@ -89,6 +92,15 @@ const Create = () => {
             <form onSubmit={handleSubmit} className='create-form'>
               <div className='row' style={{ justifyContent: 'center', alignItems: 'center' }}>
                 <div className='col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4'>
+                <div className='create-name'>
+                    <label htmlFor='create_name'>Đấu giá: </label>
+                    <input
+                      defaultChecked={checked}
+                      type='checkbox'
+                      ref={modeEl} id='create_mode' 
+                      onChange={() => setChecked(!checked)}
+                    />
+                  </div>
                   <div className='create-name'>
                     <label htmlFor='create_name'>Tên: </label>
                     <input required ref={nameEl} id='create_name' />

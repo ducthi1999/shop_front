@@ -52,6 +52,25 @@ const Header = () => {
         payload: userCoins
       })
     })
+
+    socket.on('ex-change-coins', ({ newCoins }) => {
+      dispatch(toggleLoading(false))
+      const userCoins = parseInt(coins)
+      dispatch({
+        type: 'CHANGE_COINS',
+        payload: userCoins
+      })
+    })
+
+    socket.on('no-change-coins', ({ newCoins }) => {
+      dispatch(toggleLoading(false))
+      const userCoins = parseInt(coins)
+      dispatch({
+        type: 'NO-CHANGE_COINS',
+        payload: userCoins
+      })
+    })
+
     socket.on('create-notif', () => {
       setAdminNotif(true)
       setProductNotif(true)
@@ -73,11 +92,11 @@ const Header = () => {
         <div className='container'>
           <div id='desktop'>
             <div className='header-container'>
-              <div className='avt-wrapper'>
+              
                 <a href='/'>
                   <img src={'/images/logo.png'} alt='' />
                 </a>
-              </div>
+              
               <div className='header-right-wrapper'>
                 {/* <div className='search'>
                   <i onClick={() => setSearchModal(true)} style={{ color: 'black', fontSize: '1.1rem', marginRight: 12, cursor: 'pointer' }} className="fas fa-search"></i>

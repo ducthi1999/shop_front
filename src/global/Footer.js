@@ -15,7 +15,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to=''>
-                  Thông tin giao hàng
+                  Thông tin tài khoản
                 </Link>
               </li>
               <li>
@@ -25,7 +25,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to=''>
-                  Vận chuyển
+                  Đăng nhập
                 </Link>
               </li>
             </ul>
@@ -60,27 +60,27 @@ const Footer = () => {
           <div className='contact'>
             <h2>Connect us</h2>
             <div className='social-networks'>
-              <a href=''>
+              <a href='https://www.facebook.com/profile.php?id=100039830260617'>
                 <i className="fab fa-facebook"></i>
               </a>
-              <a href=''>
+              <a href='https://www.facebook.com/profile.php?id=100039830260617'>
                 <i className="fab fa-google"></i>
               </a>
-              <a href=''>
+              <a href='https://www.facebook.com/profile.php?id=100039830260617'>
                 <i className="fab fa-instagram"></i>
               </a>
-              <a href=''>
+              <a href='https://www.facebook.com/profile.php?id=100039830260617'>
                 <i className="fas fa-phone"></i>
               </a>
             </div>
             <div className='care'>
               <p>Có câu hỏi? Chúng tôi muốn nghe từ bạn!</p>
-              <p>Email cho chúng tôi: support@chilindo.com</p>
+              <p>Email cho chúng tôi: hoangducthi1999@gmail.com</p>
             </div>
           </div>
         </div>
         <div className='copyright'>
-          <h3>COPYRIGHT @ 2019 CHILINDO.COM. ALL RIGHTS RESERVED.</h3>
+          <h3>COPYRIGHT @ 2021 HOANGDUCTHI.COM. ALL RIGHTS RESERVED.</h3>
         </div>
       </div>
     </div >

@@ -29,7 +29,7 @@ a {
 
 #loading .loading {
   position: fixed;
-  background: rgba(26, 25, 25, 0.658);
+  background: rgba(26, 25, 25, 0.625);
   top: 0;
   right: 0;
   bottom: 0;
@@ -38,7 +38,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(4px);
+  pointer-events: none;
 }
 
 #loading .loading img {

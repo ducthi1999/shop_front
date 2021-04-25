@@ -9,7 +9,7 @@ const Loading = () => {
     <div id='loading'>
       <div className='loading'>
         <img src='/images/loading.gif' />
-      </div>
+        </div>
     </div>
     ||
     null
