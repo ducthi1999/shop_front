@@ -35,6 +35,7 @@ const Request = () => {
             <h5>Tài khoản của bạn:</h5>
             <p>STK: {user.credit && user.credit.number}</p>
             <p>Ngân hàng: {user.credit && user.credit.bank}</p>
+            <p><b>Lưu ý:</b> Khi rút tiền bạn sẽ mất phí là 10% số tiền bạn muốn rút.</p>
             {
               done && 
               <h4>Gửi yêu cầu thành công, hãy chờ Admin chuyển tiền tới tài khoản của bạn!</h4>
