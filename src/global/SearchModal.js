@@ -1,6 +1,7 @@
 // import { specialCharsValidate } from '../utils/validate'
 import { useState, useRef, useEffect } from 'react'
 
+
 const SearchModal = (props) => {
   const { status } = props || null
   const [check, setCheck] = useState(false)
