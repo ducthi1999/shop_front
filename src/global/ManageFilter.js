@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getAllProductsAsync, toggleLoading } from '../redux/actions'
 
+
 const ManageFilter = () => {
   const [checkPassed, setCheckPassed] = useState(2)
   const dispatch = useDispatch()
