@@ -122,12 +122,7 @@ const Login = (props) => {
             </button>
           </div>
           <div className='form-auths'>
-            <Link to='/' className='fb'>
-              <span>Facebook</span><i className="fab fa-facebook"></i>
-            </Link>
-            <Link to='/' className='gg'>
-              <span>Google</span><i className="fab fa-google"></i>
-            </Link>
+            
           </div>
         </form>
         <Link to='/register' className='link-to-sign-in'>
